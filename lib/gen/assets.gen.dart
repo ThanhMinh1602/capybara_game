@@ -25,6 +25,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/bgr_2.png
   AssetGenImage get bgr2 => const AssetGenImage('assets/images/bgr_2.png');
 
+  /// File path: assets/images/capybara_setting.png
+  AssetGenImage get capybaraSetting =>
+      const AssetGenImage('assets/images/capybara_setting.png');
+
   /// File path: assets/images/cloud_setting.png
   AssetGenImage get cloudSetting =>
       const AssetGenImage('assets/images/cloud_setting.png');
@@ -33,12 +37,23 @@ class $AssetsImagesGen {
   AssetGenImage get cloudSettingBottom =>
       const AssetGenImage('assets/images/cloud_setting_bottom.png');
 
+  /// File path: assets/images/function_account.png
+  AssetGenImage get functionAccount =>
+      const AssetGenImage('assets/images/function_account.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [bgr1, bgr2, cloudSetting, cloudSettingBottom, logo];
+  List<AssetGenImage> get values => [
+        bgr1,
+        bgr2,
+        capybaraSetting,
+        cloudSetting,
+        cloudSettingBottom,
+        functionAccount,
+        logo
+      ];
 }
 
 class $AssetsIconsPngGen {
@@ -59,6 +74,10 @@ class $AssetsIconsPngGen {
   /// File path: assets/icons/png/music_icon.png
   AssetGenImage get musicIcon =>
       const AssetGenImage('assets/icons/png/music_icon.png');
+
+  /// File path: assets/icons/png/next_icon.png
+  AssetGenImage get nextIcon =>
+      const AssetGenImage('assets/icons/png/next_icon.png');
 
   /// File path: assets/icons/png/setting_icon.png
   AssetGenImage get settingIcon =>
@@ -82,6 +101,7 @@ class $AssetsIconsPngGen {
         closeIcon,
         instructIcon,
         musicIcon,
+        nextIcon,
         settingIcon,
         speakerIcon,
         startButton,

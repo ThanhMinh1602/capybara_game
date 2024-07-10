@@ -8,3 +8,5 @@ part 'start_bloc.freezed.dart';
 class StartBloc extends Bloc<StartEvent, StartState> {
   StartBloc() : super(const StartState());
 }
+
+extension StartBlocExtension on StartBloc {}
