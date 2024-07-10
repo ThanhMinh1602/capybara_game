@@ -1,9 +1,10 @@
 import 'package:capybara_game/features/splash/presentations/bloc/splash_bloc.dart';
+import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashWidget extends StatefulWidget {
-  const SplashWidget({Key? key}) : super(key: key);
+  const SplashWidget({super.key});
 
   @override
   State<SplashWidget> createState() => _SplashWidgetState();
@@ -16,7 +17,12 @@ class _SplashWidgetState extends State<SplashWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: Image.asset(''),
+          body: Image.asset(
+            Assets.images.bgr1.path,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
         );
       },
     );

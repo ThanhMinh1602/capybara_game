@@ -23,5 +23,6 @@ extension EventHandle on SplashBloc {
   Future<void> _onInit(
       SplashInitializeEvent event, Emitter<SplashState> emitter) async {
     await countDownUsecase();
+    appNavigator.pushAndRemoveUntil(screen: const ScreenTypeStart());
   }
 }

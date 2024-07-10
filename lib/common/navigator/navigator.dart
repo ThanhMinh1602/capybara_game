@@ -1,4 +1,5 @@
 import 'package:capybara_game/features/splash/presentations/page/splash_page.dart';
+import 'package:capybara_game/features/start/presentations/page/start_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:page_transition/page_transition.dart';
