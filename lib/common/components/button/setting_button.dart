@@ -11,15 +11,18 @@ class SettingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        AppSettingDialog.settingDialog(context);
-        // AudioManager().soundTap();
-      },
-      child: Image.asset(
-        Assets.icons.png.settingIcon.path,
-        width: 70.w,
-      ),
-    );
+    return Positioned(
+        bottom: 10.h,
+        left: 10.w,
+        child: GestureDetector(
+          onTap: () {
+            AppSettingDialog.settingDialog(context);
+            // AudioManager().soundTap();
+          },
+          child: Image.asset(
+            Assets.icons.png.settingIcon.path,
+            width: 70.w,
+          ),
+        ));
   }
 }

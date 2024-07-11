@@ -1,3 +1,4 @@
+import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/components/hearder/map_header.dart';
 import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
@@ -42,6 +43,7 @@ class MapWidget extends StatelessWidget {
             ),
           ),
           const MapHeader(),
+          const SettingButton()
         ],
       ),
     );

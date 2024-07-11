@@ -43,11 +43,7 @@ class _StartWidgetState extends State<StartWidget> {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 10.h,
-                left: 10.w,
-                child: const SettingButton(),
-              ),
+              const SettingButton(),
             ],
           ),
         );
