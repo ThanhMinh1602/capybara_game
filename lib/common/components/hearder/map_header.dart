@@ -3,7 +3,7 @@ import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MapHeader extends StatelessWidget implements PreferredSizeWidget {
+class MapHeader extends StatelessWidget {
   const MapHeader({
     super.key,
   });
@@ -40,7 +40,4 @@ class MapHeader extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size(double.infinity, 177.h);
 }

@@ -25,8 +25,9 @@ class HeaderItem extends StatelessWidget {
               Container(
                 width: 198.w,
                 height: 68.h,
+                alignment: Alignment.center,
                 margin: EdgeInsets.only(left: 59.w),
-                padding: EdgeInsets.only(left: 65.w),
+                padding: EdgeInsets.only(left: 35.w),
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(

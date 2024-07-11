@@ -24,4 +24,15 @@ class AppStyle {
     fontSize: 34.sp,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle kanit_bold_41 = GoogleFonts.kanit(
+      color: AppColor.c_C7274B,
+      fontSize: 41.sp,
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic);
+
+  static TextStyle kanit_bold_102 = GoogleFonts.kanit(
+    color: AppColor.c_ffffff,
+    fontSize: 102.sp,
+    fontWeight: FontWeight.w500,
+  );
 }

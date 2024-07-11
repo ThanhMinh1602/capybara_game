@@ -1,37 +1,23 @@
-// import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-// class AudioManager {
-//   static final AudioManager _instance = AudioManager._internal();
-//   factory AudioManager() => _instance;
+class AudioManager {
+  static final AudioManager _instance = AudioManager._internal();
+  factory AudioManager() => _instance;
 
-//   AudioManager._internal();
+  AudioManager._internal();
 
-//   final AudioCache _audioCache = AudioCache(prefix: 'assets/sounds/');
-//   final AudioPlayer _bgmPlayer = AudioPlayer();
+  final AudioPlayer _player = AudioPlayer();
+  void playBgm() {
+    String path = "sounds/bgr_audio.mp3";
+    _player.play(AssetSource(path));
+    _player.setReleaseMode(ReleaseMode.loop);
+  }
 
-//   Future<void> init() async {
-//     // Load sound files
-//     await _audioCache.loadAll([
-//       'bgm.mp3',
-//       'button_click.mp3',
-//       // Add more sounds here
-//     ]);
-//   }
+  void stopBgm() {
+    _player.stop();
+  }
 
-//   void playBgm() {
-//     _bgmPlayer.setReleaseMode(ReleaseMode.LOOP);
-//     _audioCache.play('bgm.mp3');
-//   }
-
-//   void playButtonClick() {
-//     _audioCache.play('button_click.mp3');
-//   }
-
-//   void stopBgm() {
-//     _bgmPlayer.stop();
-//   }
-
-//   void dispose() {
-//     _bgmPlayer.dispose();
-//   }
-// }
+  void dispose() {
+    _player.dispose();
+  }
+}

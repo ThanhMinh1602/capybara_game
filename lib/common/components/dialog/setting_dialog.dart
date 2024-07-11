@@ -3,7 +3,10 @@ import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/app/presentations/bloc/app_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
+import 'package:capybara_game/services/audio_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -111,9 +114,35 @@ class _MainSettingContent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(Assets.icons.png.musicIcon.path, width: 77.w),
+            BlocBuilder<AppBloc, AppState>(
+              builder: (context, state) {
+                return GestureDetector(
+                    onTap: () {
+                      context
+                          .read<AppBloc>()
+                          .add(AppEvent.stateMusic(state.music));
+                    },
+                    child: Image.asset(
+                        state.music
+                            ? Assets.icons.png.musicIcon.path
+                            : Assets.icons.png.musicOffIcon.path,
+                        width: 77.w));
+              },
+            ),
             SizedBox(width: 35.0.w),
-            Image.asset(Assets.icons.png.speakerIcon.path, width: 77.w),
+            BlocBuilder<AppBloc, AppState>(
+              builder: (context, state) {
+                return GestureDetector(
+                    onTap: () {
+                      context
+                          .read<AppBloc>()
+                          .add(AppEvent.stateSound(state.sound));
+                    },
+                    child: Image.asset( state.sound
+                            ? Assets.icons.png.speakerIcon.path :Assets.icons.png.speakerOffIcon.path ,
+                        width: 77.w));
+              },
+            ),
           ],
         ),
         SizedBox(height: 16.0.h),

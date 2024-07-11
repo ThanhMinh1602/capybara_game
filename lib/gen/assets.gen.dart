@@ -14,6 +14,9 @@ class $AssetsIconsGen {
 
   /// Directory path: assets/icons/png
   $AssetsIconsPngGen get png => const $AssetsIconsPngGen();
+
+  /// Directory path: assets/icons/svg
+  $AssetsIconsSvgGen get svg => const $AssetsIconsSvgGen();
 }
 
 class $AssetsImagesGen {
@@ -44,6 +47,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/map.png
+  AssetGenImage get map => const AssetGenImage('assets/images/map.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         bgr1,
@@ -52,8 +58,25 @@ class $AssetsImagesGen {
         cloudSetting,
         cloudSettingBottom,
         functionAccount,
-        logo
+        logo,
+        map
       ];
+}
+
+class $AssetsSoundsGen {
+  const $AssetsSoundsGen();
+
+  /// File path: assets/sounds/bgr_audio.mp3
+  String get bgrAudio => 'assets/sounds/bgr_audio.mp3';
+
+  /// File path: assets/sounds/bgr_audio1.mp3
+  String get bgrAudio1 => 'assets/sounds/bgr_audio1.mp3';
+
+  /// File path: assets/sounds/click_sound.mp3
+  String get clickSound => 'assets/sounds/click_sound.mp3';
+
+  /// List of all assets
+  List<String> get values => [bgrAudio, bgrAudio1, clickSound];
 }
 
 class $AssetsIconsPngGen {
@@ -63,17 +86,35 @@ class $AssetsIconsPngGen {
   AssetGenImage get backIcon =>
       const AssetGenImage('assets/icons/png/back_icon.png');
 
+  /// File path: assets/icons/png/circle_plus_icon.png
+  AssetGenImage get circlePlusIcon =>
+      const AssetGenImage('assets/icons/png/circle_plus_icon.png');
+
   /// File path: assets/icons/png/close_icon.png
   AssetGenImage get closeIcon =>
       const AssetGenImage('assets/icons/png/close_icon.png');
+
+  /// File path: assets/icons/png/gold.png
+  AssetGenImage get gold => const AssetGenImage('assets/icons/png/gold.png');
+
+  /// File path: assets/icons/png/heart.png
+  AssetGenImage get heart => const AssetGenImage('assets/icons/png/heart.png');
 
   /// File path: assets/icons/png/instruct_icon.png
   AssetGenImage get instructIcon =>
       const AssetGenImage('assets/icons/png/instruct_icon.png');
 
+  /// File path: assets/icons/png/level_icon.png
+  AssetGenImage get levelIcon =>
+      const AssetGenImage('assets/icons/png/level_icon.png');
+
   /// File path: assets/icons/png/music_icon.png
   AssetGenImage get musicIcon =>
       const AssetGenImage('assets/icons/png/music_icon.png');
+
+  /// File path: assets/icons/png/music_off_icon.png
+  AssetGenImage get musicOffIcon =>
+      const AssetGenImage('assets/icons/png/music_off_icon.png');
 
   /// File path: assets/icons/png/next_icon.png
   AssetGenImage get nextIcon =>
@@ -87,6 +128,13 @@ class $AssetsIconsPngGen {
   AssetGenImage get speakerIcon =>
       const AssetGenImage('assets/icons/png/speaker_icon.png');
 
+  /// File path: assets/icons/png/speaker_off_icon.png
+  AssetGenImage get speakerOffIcon =>
+      const AssetGenImage('assets/icons/png/speaker_off_icon.png');
+
+  /// File path: assets/icons/png/star.png
+  AssetGenImage get star => const AssetGenImage('assets/icons/png/star.png');
+
   /// File path: assets/icons/png/start_button.png
   AssetGenImage get startButton =>
       const AssetGenImage('assets/icons/png/start_button.png');
@@ -98,15 +146,32 @@ class $AssetsIconsPngGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         backIcon,
+        circlePlusIcon,
         closeIcon,
+        gold,
+        heart,
         instructIcon,
+        levelIcon,
         musicIcon,
+        musicOffIcon,
         nextIcon,
         settingIcon,
         speakerIcon,
+        speakerOffIcon,
+        star,
         startButton,
         volumeIcon
       ];
+}
+
+class $AssetsIconsSvgGen {
+  const $AssetsIconsSvgGen();
+
+  /// File path: assets/icons/svg/star.svg
+  String get star => 'assets/icons/svg/star.svg';
+
+  /// List of all assets
+  List<String> get values => [star];
 }
 
 class Assets {
@@ -114,6 +179,7 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 }
 
 class AssetGenImage {

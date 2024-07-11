@@ -1,14 +1,9 @@
-import 'package:capybara_game/common/components/dialog/custom_dialog.dart';
-import 'package:capybara_game/common/components/dialog/setting_dialog.dart';
-import 'package:capybara_game/common/constants/app_color.dart';
-import 'package:capybara_game/common/constants/app_style.dart';
+import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/extensions/build_context_extension.dart';
-import 'package:capybara_game/features/app/presentations/bloc/app_bloc.dart';
+import 'package:capybara_game/common/navigator/navigator.dart';
 import 'package:capybara_game/features/start/presentations/bloc/start_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -38,23 +33,20 @@ class _StartWidgetState extends State<StartWidget> {
                 bottom: 770.h,
                 left: 216.w,
                 right: 216.w,
-                child: Image.asset(
-                  Assets.icons.png.startButton.path,
-                  width: 287.76.w,
+                child: GestureDetector(
+                  onTap: () {
+                    context.getNavigator().push(screen: const ScreenType.map());
+                  },
+                  child: Image.asset(
+                    Assets.icons.png.startButton.path,
+                    width: 287.76.w,
+                  ),
                 ),
               ),
               Positioned(
                 bottom: 10.h,
                 left: 10.w,
-                child: GestureDetector(
-                  onTap: () {
-                    AppSettingDialog.settingDialog(context);
-                  },
-                  child: Image.asset(
-                    Assets.icons.png.settingIcon.path,
-                    width: 70.w,
-                  ),
-                ),
+                child: const SettingButton(),
               ),
             ],
           ),
