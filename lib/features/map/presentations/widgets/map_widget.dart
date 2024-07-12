@@ -31,7 +31,7 @@ class MapWidget extends StatelessWidget {
                       right: 40.w,
                       child: _buildLevel(
                         context,
-                        level: 1,
+                        level: 3,
                         ratingStar: 3,
                       ),
                     ),

@@ -10,7 +10,7 @@ class PlayerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: PlayerBinding.generateBloc,
+      create: (context) => PlayerBinding.generateBloc(context),
       child: PlayerWidget(
         level: level,
       ),

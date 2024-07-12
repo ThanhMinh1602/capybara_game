@@ -14,9 +14,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     on<PlayerInitEvent>(_onInit);
     on<PlayerTapCardEvent>(_onTapCard);
   }
-
   void _onInit(PlayerInitEvent event, Emitter<PlayerState> emitter) {
-    final dataCard = PlayerService().generateCardList();
+    final dataCard = PlayerService().generateCardList(event.level);
     emitter(state.copyWith(dataCard: dataCard));
   }
 

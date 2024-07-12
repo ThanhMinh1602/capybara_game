@@ -7,5 +7,7 @@ class PlayerState with _$PlayerState {
     CardModel? firstSelectedCard,
     CardModel? secondSelectedCard,
     @Default(false) bool isProcessing,
+    @Default(0) int tries,
+    @Default(0) int score,
   }) = _PlayerState;
 }
