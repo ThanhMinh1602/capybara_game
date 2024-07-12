@@ -1,13 +1,11 @@
 import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/components/hearder/map_header.dart';
-import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
+import 'package:capybara_game/features/map/presentations/bloc/map_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MapWidget extends StatelessWidget {
   const MapWidget({super.key});
@@ -32,9 +30,9 @@ class MapWidget extends StatelessWidget {
                       left: 0,
                       right: 40.w,
                       child: _buildLevel(
+                        context,
                         level: 1,
                         ratingStar: 3,
-                        onTap: () {},
                       ),
                     ),
                   ],
@@ -49,17 +47,18 @@ class MapWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildLevel({
-    void Function()? onTap,
+  Widget _buildLevel(
+    BuildContext context, {
     int? ratingStar,
     required int level,
   }) {
     int stars = (ratingStar != null && ratingStar >= 1 && ratingStar <= 3)
         ? ratingStar
         : 1;
-
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        context.read<MapBloc>().add(MapEvent.chooseLevel(level));
+      },
       child: Center(
         child: Column(
           children: [

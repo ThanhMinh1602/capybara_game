@@ -17,4 +17,17 @@ class AppColor {
   static const c_7A3007 = Color(0xff7A3007);
   static const c_FFD707 = Color(0xffFFD707);
   static const c_5E2200 = Color(0xff5E2200);
+  static const c_70C0D4 = Color(0xff70C0D4);
+  static const c_269DB7 = Color(0xff269DB7);
+  static const c_F9EBC8 = Color(0xffF9EBC8);
+  static const c_B1194A = Color(0xffB1194A);
+  static const c_C6F0B7 = Color(0xffC6F0B7);
+  static const c_BBE37B = Color(0xffBBE37B);
+  static const c_909090 = Color(0xff909090);
+//boxShadow
+  static final boxShadow = BoxShadow(
+      blurRadius: 4,
+      offset: const Offset(0, 4),
+      spreadRadius: 0,
+      color: AppColor.c_000000.withOpacity(0.25));
 }

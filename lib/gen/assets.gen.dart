@@ -28,9 +28,20 @@ class $AssetsImagesGen {
   /// File path: assets/images/bgr_2.png
   AssetGenImage get bgr2 => const AssetGenImage('assets/images/bgr_2.png');
 
+  /// File path: assets/images/bgr_player.png
+  AssetGenImage get bgrPlayer =>
+      const AssetGenImage('assets/images/bgr_player.png');
+
   /// File path: assets/images/capybara_setting.png
   AssetGenImage get capybaraSetting =>
       const AssetGenImage('assets/images/capybara_setting.png');
+
+  /// Directory path: assets/images/cards
+  $AssetsImagesCardsGen get cards => const $AssetsImagesCardsGen();
+
+  /// File path: assets/images/cloud_header.png
+  AssetGenImage get cloudHeader =>
+      const AssetGenImage('assets/images/cloud_header.png');
 
   /// File path: assets/images/cloud_setting.png
   AssetGenImage get cloudSetting =>
@@ -54,7 +65,9 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         bgr1,
         bgr2,
+        bgrPlayer,
         capybaraSetting,
+        cloudHeader,
         cloudSetting,
         cloudSettingBottom,
         functionAccount,
@@ -86,6 +99,10 @@ class $AssetsIconsPngGen {
   AssetGenImage get backIcon =>
       const AssetGenImage('assets/icons/png/back_icon.png');
 
+  /// File path: assets/icons/png/bgr_level.png
+  AssetGenImage get bgrLevel =>
+      const AssetGenImage('assets/icons/png/bgr_level.png');
+
   /// File path: assets/icons/png/circle_plus_icon.png
   AssetGenImage get circlePlusIcon =>
       const AssetGenImage('assets/icons/png/circle_plus_icon.png');
@@ -94,11 +111,23 @@ class $AssetsIconsPngGen {
   AssetGenImage get closeIcon =>
       const AssetGenImage('assets/icons/png/close_icon.png');
 
+  /// File path: assets/icons/png/crown_icon.png
+  AssetGenImage get crownIcon =>
+      const AssetGenImage('assets/icons/png/crown_icon.png');
+
   /// File path: assets/icons/png/gold.png
   AssetGenImage get gold => const AssetGenImage('assets/icons/png/gold.png');
 
   /// File path: assets/icons/png/heart.png
   AssetGenImage get heart => const AssetGenImage('assets/icons/png/heart.png');
+
+  /// File path: assets/icons/png/help_icon.png
+  AssetGenImage get helpIcon =>
+      const AssetGenImage('assets/icons/png/help_icon.png');
+
+  /// File path: assets/icons/png/help_number.png
+  AssetGenImage get helpNumber =>
+      const AssetGenImage('assets/icons/png/help_number.png');
 
   /// File path: assets/icons/png/instruct_icon.png
   AssetGenImage get instructIcon =>
@@ -119,6 +148,14 @@ class $AssetsIconsPngGen {
   /// File path: assets/icons/png/next_icon.png
   AssetGenImage get nextIcon =>
       const AssetGenImage('assets/icons/png/next_icon.png');
+
+  /// File path: assets/icons/png/pause_icon.png
+  AssetGenImage get pauseIcon =>
+      const AssetGenImage('assets/icons/png/pause_icon.png');
+
+  /// File path: assets/icons/png/player_star.png
+  AssetGenImage get playerStar =>
+      const AssetGenImage('assets/icons/png/player_star.png');
 
   /// File path: assets/icons/png/setting_icon.png
   AssetGenImage get settingIcon =>
@@ -146,15 +183,21 @@ class $AssetsIconsPngGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         backIcon,
+        bgrLevel,
         circlePlusIcon,
         closeIcon,
+        crownIcon,
         gold,
         heart,
+        helpIcon,
+        helpNumber,
         instructIcon,
         levelIcon,
         musicIcon,
         musicOffIcon,
         nextIcon,
+        pauseIcon,
+        playerStar,
         settingIcon,
         speakerIcon,
         speakerOffIcon,
@@ -172,6 +215,142 @@ class $AssetsIconsSvgGen {
 
   /// List of all assets
   List<String> get values => [star];
+}
+
+class $AssetsImagesCardsGen {
+  const $AssetsImagesCardsGen();
+
+  /// File path: assets/images/cards/1.png
+  AssetGenImage get a1 => const AssetGenImage('assets/images/cards/1.png');
+
+  /// File path: assets/images/cards/10.png
+  AssetGenImage get a10 => const AssetGenImage('assets/images/cards/10.png');
+
+  /// File path: assets/images/cards/11.png
+  AssetGenImage get a11 => const AssetGenImage('assets/images/cards/11.png');
+
+  /// File path: assets/images/cards/12.png
+  AssetGenImage get a12 => const AssetGenImage('assets/images/cards/12.png');
+
+  /// File path: assets/images/cards/13.png
+  AssetGenImage get a13 => const AssetGenImage('assets/images/cards/13.png');
+
+  /// File path: assets/images/cards/14.png
+  AssetGenImage get a14 => const AssetGenImage('assets/images/cards/14.png');
+
+  /// File path: assets/images/cards/15.png
+  AssetGenImage get a15 => const AssetGenImage('assets/images/cards/15.png');
+
+  /// File path: assets/images/cards/16.png
+  AssetGenImage get a16 => const AssetGenImage('assets/images/cards/16.png');
+
+  /// File path: assets/images/cards/17.png
+  AssetGenImage get a17 => const AssetGenImage('assets/images/cards/17.png');
+
+  /// File path: assets/images/cards/18.png
+  AssetGenImage get a18 => const AssetGenImage('assets/images/cards/18.png');
+
+  /// File path: assets/images/cards/19.png
+  AssetGenImage get a19 => const AssetGenImage('assets/images/cards/19.png');
+
+  /// File path: assets/images/cards/2.png
+  AssetGenImage get a2 => const AssetGenImage('assets/images/cards/2.png');
+
+  /// File path: assets/images/cards/20.png
+  AssetGenImage get a20 => const AssetGenImage('assets/images/cards/20.png');
+
+  /// File path: assets/images/cards/21.png
+  AssetGenImage get a21 => const AssetGenImage('assets/images/cards/21.png');
+
+  /// File path: assets/images/cards/22.png
+  AssetGenImage get a22 => const AssetGenImage('assets/images/cards/22.png');
+
+  /// File path: assets/images/cards/23.png
+  AssetGenImage get a23 => const AssetGenImage('assets/images/cards/23.png');
+
+  /// File path: assets/images/cards/24.png
+  AssetGenImage get a24 => const AssetGenImage('assets/images/cards/24.png');
+
+  /// File path: assets/images/cards/26.png
+  AssetGenImage get a26 => const AssetGenImage('assets/images/cards/26.png');
+
+  /// File path: assets/images/cards/27.png
+  AssetGenImage get a27 => const AssetGenImage('assets/images/cards/27.png');
+
+  /// File path: assets/images/cards/28.png
+  AssetGenImage get a28 => const AssetGenImage('assets/images/cards/28.png');
+
+  /// File path: assets/images/cards/29.png
+  AssetGenImage get a29 => const AssetGenImage('assets/images/cards/29.png');
+
+  /// File path: assets/images/cards/3.png
+  AssetGenImage get a3 => const AssetGenImage('assets/images/cards/3.png');
+
+  /// File path: assets/images/cards/30.png
+  AssetGenImage get a30 => const AssetGenImage('assets/images/cards/30.png');
+
+  /// File path: assets/images/cards/31.png
+  AssetGenImage get a31 => const AssetGenImage('assets/images/cards/31.png');
+
+  /// File path: assets/images/cards/32.png
+  AssetGenImage get a32 => const AssetGenImage('assets/images/cards/32.png');
+
+  /// File path: assets/images/cards/33.png
+  AssetGenImage get a33 => const AssetGenImage('assets/images/cards/33.png');
+
+  /// File path: assets/images/cards/4.png
+  AssetGenImage get a4 => const AssetGenImage('assets/images/cards/4.png');
+
+  /// File path: assets/images/cards/5.png
+  AssetGenImage get a5 => const AssetGenImage('assets/images/cards/5.png');
+
+  /// File path: assets/images/cards/6.png
+  AssetGenImage get a6 => const AssetGenImage('assets/images/cards/6.png');
+
+  /// File path: assets/images/cards/7.png
+  AssetGenImage get a7 => const AssetGenImage('assets/images/cards/7.png');
+
+  /// File path: assets/images/cards/8.png
+  AssetGenImage get a8 => const AssetGenImage('assets/images/cards/8.png');
+
+  /// File path: assets/images/cards/9.png
+  AssetGenImage get a9 => const AssetGenImage('assets/images/cards/9.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        a1,
+        a10,
+        a11,
+        a12,
+        a13,
+        a14,
+        a15,
+        a16,
+        a17,
+        a18,
+        a19,
+        a2,
+        a20,
+        a21,
+        a22,
+        a23,
+        a24,
+        a26,
+        a27,
+        a28,
+        a29,
+        a3,
+        a30,
+        a31,
+        a32,
+        a33,
+        a4,
+        a5,
+        a6,
+        a7,
+        a8,
+        a9
+      ];
 }
 
 class Assets {

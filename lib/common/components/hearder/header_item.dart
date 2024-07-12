@@ -29,14 +29,7 @@ class HeaderItem extends StatelessWidget {
                 margin: EdgeInsets.only(left: 59.w),
                 padding: EdgeInsets.only(left: 35.w),
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 4,
-                      spreadRadius: 0,
-                      offset: const Offset(0, 4),
-                      color: AppColor.c_000000.withOpacity(0.25),
-                    )
-                  ],
+                  boxShadow: [AppColor.boxShadow],
                   borderRadius: BorderRadius.circular(34.r),
                   gradient: const LinearGradient(
                     begin: Alignment.topCenter,

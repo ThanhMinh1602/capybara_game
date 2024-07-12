@@ -1,4 +1,5 @@
 import 'package:capybara_game/features/map/presentations/page/map_page.dart';
+import 'package:capybara_game/features/player/presentations/page/player_page.dart';
 import 'package:capybara_game/features/splash/presentations/page/splash_page.dart';
 import 'package:capybara_game/features/start/presentations/page/start_page.dart';
 import 'package:flutter/widgets.dart';
