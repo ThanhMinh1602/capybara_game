@@ -12,7 +12,7 @@ class LevelService {
     return await _databaseHelper.getLevels();
   }
 
-  Future<LevelModel?> getLevelByLevel(int level) async {
+  Future<LevelModel?> getDataLevelByLevel(int level) async {
     return await _databaseHelper.getLevelByLevel(level);
   }
 
@@ -22,5 +22,9 @@ class LevelService {
 
   Future<void> deleteLevel(int level) async {
     await _databaseHelper.deleteLevel(level);
+  }
+
+  Future<void> deleteAllLevel() async {
+    await _databaseHelper.deleteAllLevels();
   }
 }

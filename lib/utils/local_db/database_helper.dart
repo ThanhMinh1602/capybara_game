@@ -21,7 +21,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'game_database.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _onCreate,
     );
   }
@@ -66,6 +66,11 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [level],
     );
+  }
+
+  Future<int> deleteAllLevels() async {
+    Database db = await database;
+    return await db.delete('levels');
   }
 
   Future<LevelModel?> getLevelByLevel(int level) async {

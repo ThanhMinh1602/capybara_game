@@ -35,7 +35,8 @@ class AppDialog {
     BuildContext context, {
     required String level,
     required String tries,
-    required String score,
+    required String oldTries,
+    required int ratingStar,
     void Function()? onTapMenu,
     void Function()? onTapRetry,
     void Function()? onTapNext,
@@ -54,7 +55,7 @@ class AppDialog {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        for (int i = 0; i < 3; i++)
+                        for (int i = 0; i < ratingStar; i++)
                           Image.asset(
                             Assets.icons.png.playerStar.path,
                             width: 91.w,
@@ -112,7 +113,7 @@ class AppDialog {
                           ],
                         ),
                       ),
-                      child: Text(score,
+                      child: Text(oldTries,
                           style: AppStyle.kanit_medium_38.copyWith(
                               fontSize: 40.sp, fontWeight: FontWeight.bold)),
                     ),

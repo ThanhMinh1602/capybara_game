@@ -33,19 +33,26 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           AppDialog.successDialog(
             context,
             level: widget.level.toString(),
-            score: state.score.toString(),
+            oldTries: state.oldTries == 0 || state.oldTries > state.tries
+                ? state.tries.toString()
+                : state.oldTries.toString(),
             tries: state.tries.toString(),
+            ratingStar: state.ratingStar,
             onTapMenu: () {},
             onTapRetry: () {
-              context.read<PlayerBloc>().add(PlayerEvent.onTapRetry(LevelModel(
-                  level: widget.level, ratingStar: 0, score: 0, tries: 0)));
+              context.read<PlayerBloc>().add(PlayerEvent.onTapRetry(
+                  LevelModel(level: widget.level, ratingStar: 0, tries: 0)));
             },
             onTapNext: () {
-              context.read<PlayerBloc>().add(PlayerEvent.onTapNext(LevelModel(
-                  level: widget.level,
-                  ratingStar: 3,
-                  score: state.score,
-                  tries: state.tries)));
+              context.read<PlayerBloc>().add(
+                    PlayerEvent.onTapNext(
+                      LevelModel(
+                        level: widget.level,
+                        ratingStar: 3,
+                        tries: state.tries,
+                      ),
+                    ),
+                  );
             },
           );
         }
@@ -100,7 +107,9 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                 _buildCloudTop(),
                 _buildContainerLevel(),
                 _buildBottomHeader(
-                    ratingStar: 3, tries: state.tries, score: state.score),
+                    ratingStar: state.ratingStar,
+                    tries: state.tries,
+                    score: state.oldTries),
               ],
             ),
           ),
@@ -124,8 +133,9 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                 }
                 return GestureDetector(
                   onTap: () {
-                    context.read<PlayerBloc>().add(PlayerEvent.tapCard(
-                        card, state.tries + 1, state.score));
+                    context
+                        .read<PlayerBloc>()
+                        .add(PlayerEvent.tapCard(card, state.tries, level));
                   },
                   child: Card(
                     color: AppColor.c_70C0D4,
