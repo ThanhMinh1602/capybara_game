@@ -45,5 +45,9 @@ class AppStyle {
     fontSize: 38.sp,
     fontWeight: FontWeight.w500,
   );
-  
+  static TextStyle kanit_semibold_19 = GoogleFonts.kanit(
+    color: AppColor.c_003B81,
+    fontSize: 19.sp,
+    fontWeight: FontWeight.w800,
+  );
 }

@@ -1,8 +1,10 @@
+import 'package:capybara_game/common/components/dialog/app_dialog.dart';
 import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/player/presentations/bloc/player_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/card_model.dart';
+import 'package:capybara_game/model/level_model.dart';
 import 'package:capybara_game/services/player_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,37 +27,94 @@ class _PlayerWidgetState extends State<PlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          _buildPlayerBody(),
-          _buildHeaderPlayer(),
-        ],
+    return BlocListener<PlayerBloc, PlayerState>(
+      listener: (context, state) {
+        if (state.isSuccess) {
+          AppDialog.successDialog(
+            context,
+            level: widget.level.toString(),
+            score: state.score.toString(),
+            tries: state.tries.toString(),
+            onTapMenu: () {},
+            onTapRetry: () {
+              context.read<PlayerBloc>().add(PlayerEvent.onTapRetry(LevelModel(
+                  level: widget.level, ratingStar: 0, score: 0, tries: 0)));
+            },
+            onTapNext: () {
+              context.read<PlayerBloc>().add(PlayerEvent.onTapNext(LevelModel(
+                  level: widget.level,
+                  ratingStar: 3,
+                  score: state.score,
+                  tries: state.tries)));
+            },
+          );
+        }
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            _buildPlayerBgr(),
+            _buildPlayerBody(),
+          ],
+        ),
       ),
     );
   }
 
-  void onCardTap(CardModel card) {
-    context.read<PlayerBloc>().add(PlayerEvent.tapCard(card));
+  Widget _buildPlayerBgr() {
+    return Image.asset(
+      Assets.images.bgrPlayer.path,
+      width: double.infinity,
+      height: double.infinity,
+      fit: BoxFit.cover,
+    );
   }
 
   Widget _buildPlayerBody() {
-    return Stack(
-      children: [
-        Image.asset(
-          Assets.images.bgrPlayer.path,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-        BlocBuilder<PlayerBloc, PlayerState>(
-          builder: (context, state) {
-            final datas = state.dataCard;
-            final config = PlayerService().getGridConfig(widget.level);
-            return GridView.builder(
-              padding: EdgeInsets.only(top: 400.h),
+    return BlocBuilder<PlayerBloc, PlayerState>(builder: (context, state) {
+      final datas = state.dataCard;
+      final level = widget.level;
+      final config = PlayerService().getGridConfigModel(level);
+      return Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 279.h,
+            decoration: BoxDecoration(
+              boxShadow: [AppColor.boxShadow],
+              borderRadius:
+                  BorderRadius.vertical(bottom: Radius.circular(45.r)),
+              gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.29, 0.71, 1],
+                colors: [
+                  AppColor.c_ffffff,
+                  AppColor.c_70C0D4,
+                  AppColor.c_269DB7
+                ],
+              ),
+            ),
+            child: Stack(
+              children: [
+                _buildCloudTop(),
+                _buildContainerLevel(),
+                _buildBottomHeader(
+                    ratingStar: 3, tries: state.tries, score: state.score),
+              ],
+            ),
+          ),
+          Expanded(
+            child: GridView.builder(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 30.w,
+                  vertical: level == 1
+                      ? 350.h
+                      : level == 2
+                          ? 230.h
+                          : 120.h),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: config['gridSize']!.toInt(),
+                crossAxisCount: level == 1 ? 2 : config.gridSize,
               ),
               itemCount: datas.length,
               itemBuilder: (context, index) {
@@ -64,9 +123,12 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                   return const SizedBox.shrink();
                 }
                 return GestureDetector(
-                  onTap: () => onCardTap(card),
+                  onTap: () {
+                    context.read<PlayerBloc>().add(PlayerEvent.tapCard(
+                        card, state.tries + 1, state.score));
+                  },
                   child: Card(
-                    color: Colors.blue,
+                    color: AppColor.c_70C0D4,
                     child: card.isFlipped
                         ? Image.asset(datas[index].identifier)
                         : Image.asset(
@@ -76,41 +138,17 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                   ),
                 );
               },
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  Container _buildHeaderPlayer() {
-    return Container(
-      width: double.infinity,
-      height: 279.h,
-      decoration: BoxDecoration(
-        boxShadow: [AppColor.boxShadow],
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(45.r)),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.29, 0.71, 1],
-          colors: [AppColor.c_ffffff, AppColor.c_70C0D4, AppColor.c_269DB7],
-        ),
-      ),
-      child: Stack(
-        children: [
-          _buildCloudTop(),
-          _buildContainerLevel(),
-          _buildBottomHeader(ratingStar: 3, leftPoint: 10, rightPoint: 20),
+            ),
+          )
         ],
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildBottomHeader({
     required int ratingStar,
-    int? leftPoint,
-    int? rightPoint,
+    int? tries,
+    int? score,
   }) {
     return Positioned(
       bottom: 20.h,
@@ -120,7 +158,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
         children: [
           _buildPointItem(
             iconPath: Assets.icons.png.helpNumber.path,
-            point: leftPoint,
+            point: tries,
           ),
           const Spacer(),
           for (int i = 0; i < ratingStar; i++)
@@ -132,7 +170,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           const Spacer(),
           _buildPointItem(
             iconPath: Assets.icons.png.crownIcon.path,
-            point: rightPoint,
+            point: score,
           ),
         ],
       ),

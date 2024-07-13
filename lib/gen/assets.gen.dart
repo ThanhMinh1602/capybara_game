@@ -115,6 +115,10 @@ class $AssetsIconsPngGen {
   AssetGenImage get crownIcon =>
       const AssetGenImage('assets/icons/png/crown_icon.png');
 
+  /// File path: assets/icons/png/crown_icon_yl.png
+  AssetGenImage get crownIconYl =>
+      const AssetGenImage('assets/icons/png/crown_icon_yl.png');
+
   /// File path: assets/icons/png/gold.png
   AssetGenImage get gold => const AssetGenImage('assets/icons/png/gold.png');
 
@@ -191,6 +195,7 @@ class $AssetsIconsPngGen {
         circlePlusIcon,
         closeIcon,
         crownIcon,
+        crownIconYl,
         gold,
         heart,
         helpIcon,

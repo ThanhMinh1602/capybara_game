@@ -12,8 +12,10 @@ class CustomDialog extends StatelessWidget {
   const CustomDialog({
     super.key,
     required this.child,
+    required this.title,
   });
   final Widget child;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
@@ -52,7 +54,7 @@ class CustomDialog extends StatelessWidget {
                     ),
                   ),
                 ),
-                _buildCloudTitle(),
+                _buildCloudTitle(title),
                 if (state.option != 0)
                   Positioned(
                     left: 8.w,
@@ -95,7 +97,7 @@ class CustomDialog extends StatelessWidget {
     );
   }
 
-  static Widget _buildCloudTitle() {
+  static Widget _buildCloudTitle(String title) {
     return Positioned(
       top: 0,
       left: 72.w,
@@ -105,7 +107,7 @@ class CustomDialog extends StatelessWidget {
         children: [
           Image.asset(Assets.images.cloudSetting.path),
           ShadowText(
-            'Cài đặt',
+            title,
             style: AppStyle.dialogTitle,
           )
         ],
