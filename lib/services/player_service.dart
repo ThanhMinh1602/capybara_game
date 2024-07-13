@@ -31,50 +31,89 @@ class PlayerService {
   }
 
   Map<String, int> getGridConfig(int level) {
-    // Nếu cấp độ từ 1 đến 9
-    if (level <= 9) {
-      int size = level + 1; // Kích thước lưới là cấp độ + 1
+    if (level == 1) {
       return {
-        'gridSize': size, // Kích thước lưới (ví dụ: 2x2, 3x3, ...)
-        'numPairs': (size * size) ~/
-            2, // Số lượng cặp thẻ là một nửa tổng số ô trong lưới
-        'matchCount': 2 // Mỗi cặp thẻ gồm 2 thẻ
+        'gridSize': 1,
+        'numPairs': 1 * 2 ~/ 2,
+        'matchCount': 2,
       };
-    }
-    // Nếu cấp độ từ 10 đến 15
-    else if (level <= 15) {
+    } else if (level == 2) {
       return {
-        'gridSize': 7, // Kích thước lưới cố định là 7x7
-        'numPairs': (7 * 7) ~/
-            3, // Số lượng cặp thẻ là một phần ba tổng số ô trong lưới
-        'matchCount': 3 // Mỗi cặp thẻ gồm 3 thẻ
+        'gridSize': 2,
+        'numPairs': 2 * 2 ~/ 2,
+        'matchCount': 2,
       };
-    }
-    // Nếu cấp độ từ 16 đến 20
-    else if (level <= 20) {
+    } else if (level == 3) {
       return {
-        'gridSize': 7, // Kích thước lưới cố định là 7x7
-        'numPairs': (7 * 7) ~/
-            4, // Số lượng cặp thẻ là một phần tư tổng số ô trong lưới
-        'matchCount': 4 // Mỗi cặp thẻ gồm 4 thẻ
+        'gridSize': 2,
+        'numPairs': 2 * 3 ~/ 2,
+        'matchCount': 2,
       };
-    }
-    // Nếu cấp độ từ 21 đến 30
-    else if (level <= 30) {
+    } else if (level == 4) {
       return {
-        'gridSize': 8, // Kích thước lưới cố định là 8x8
-        'numPairs': (8 * 8) ~/
-            3, // Số lượng cặp thẻ là một phần ba tổng số ô trong lưới
-        'matchCount': 3 // Mỗi cặp thẻ gồm 3 thẻ
+        'gridSize': 3,
+        'numPairs': 3 * 3 ~/ 2,
+        'matchCount': 2,
       };
-    }
-    // Nếu cấp độ từ 31 trở lên
-    else {
+    } else if (level == 5) {
       return {
-        'gridSize': 8, // Kích thước lưới cố định là 8x8
-        'numPairs': (8 * 8) ~/
-            4, // Số lượng cặp thẻ là một phần tư tổng số ô trong lưới
-        'matchCount': 4 // Mỗi cặp thẻ gồm 4 thẻ
+        'gridSize': 3,
+        'numPairs': 3 * 4 ~/ 2,
+        'matchCount': 2,
+      };
+    } else if (level == 6) {
+      return {
+        'gridSize': 4,
+        'numPairs': 4 * 4 ~/ 2,
+        'matchCount': 2,
+      };
+    } else if (level == 7) {
+      return {
+        'gridSize': 4,
+        'numPairs': 4 * 5 ~/ 2,
+        'matchCount': 2,
+      };
+    } else if (level == 8) {
+      return {
+        'gridSize': 5,
+        'numPairs': 5 * 5 ~/ 2,
+        'matchCount': 2,
+      };
+    } else if (level == 9) {
+      return {
+        'gridSize': 5,
+        'numPairs': 5 * 6 ~/ 2,
+        'matchCount': 2,
+      };
+    } else if (level == 10) {
+      return {
+        'gridSize': 6,
+        'numPairs': 6 * 6 ~/ 2,
+        'matchCount': 2,
+      };
+    } else if (level <= 15) {
+      return {
+        'gridSize': 7,
+        'numPairs': (7 * 7) ~/ 3,
+        'matchCount': 3,
+      };
+    } else if (level <= 20) {
+      return {
+        'gridSize': 7,
+        'numPairs': (7 * 7) ~/ 4,
+        'matchCount': 4,
+      };
+    } else if (level <= 30) {
+      return {
+        'gridSize': 8,
+        'numPairs': (8 * 8) ~/ 3,
+        'matchCount': 3,
+      };
+    } else {
+      return {
+        'gridSize': 8,
+        'numPairs': (8 * 8) ~/ 4,
+        'matchCount': 4,
       };
     }
   }
