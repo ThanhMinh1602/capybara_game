@@ -1,27 +1,23 @@
 class LevelModel {
   final int level;
-  final int tries;
   final int ratingStar;
+  final double left;
+  final double bottom;
 
   LevelModel({
     required this.level,
-    required this.tries,
     required this.ratingStar,
+    required this.left,
+    required this.bottom,
   });
+}
 
-  factory LevelModel.fromJson(Map<String, dynamic> json) {
-    return LevelModel(
-      level: json['level'],
-      tries: json['tries'],
-      ratingStar: json['ratingStar'],
-    );
-  }
+class MapData {
+  final String imagePath;
+  final List<LevelModel> levels;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'level': level,
-      'tries': tries,
-      'ratingStar': ratingStar,
-    };
-  }
+  MapData({
+    required this.imagePath,
+    required this.levels,
+  });
 }

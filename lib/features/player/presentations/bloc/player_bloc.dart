@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/common/navigator/navigator.dart';
 import 'package:capybara_game/model/card_model.dart';
-import 'package:capybara_game/model/level_model.dart';
+import 'package:capybara_game/model/player_model.dart';
+import 'package:capybara_game/services/audio_service.dart';
 import 'package:capybara_game/services/level_service.dart';
 import 'package:capybara_game/services/player_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,12 +16,14 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   final AppNavigator appNavigator;
   final LevelService levelService;
   final PlayerService playerService;
+  final AudioService audioService;
 
-  PlayerBloc({
-    required this.levelService,
-    required this.appNavigator,
-    required this.playerService,
-  }) : super((const PlayerState())) {
+  PlayerBloc(
+      {required this.levelService,
+      required this.appNavigator,
+      required this.playerService,
+      required this.audioService})
+      : super((const PlayerState())) {
     on(_onInit);
     on(_onTapCard);
     on(onTapNextLevel);
@@ -48,6 +51,8 @@ extension PlayerBlocExtension on PlayerBloc {
     // Kiểm tra nếu đang xử lý hoặc thẻ đã lật hoặc đã ghép thì không làm gì
     if (state.isProcessing || card.isFlipped || card.isMatched) return;
 
+    // Phát âm thanh khi người chơi chạm vào thẻ
+    audioService.tapCardSound();
     card.isFlipped = true; // Lật thẻ hiện tại
     int newTries = state.tries + 1; // Tăng tries lên 1
     int stars = _calculateStars(newTries, event.level); // Tính số sao
@@ -73,10 +78,16 @@ extension PlayerBlocExtension on PlayerBloc {
             secondSelectedCard: null,
             isProcessing: false));
 
+        // Phát âm thanh khi ghép thành công
+        audioService.tapCardSoundSuccess();
+
         if (_allCardsMatched()) {
           emitter(state.copyWith(
               isSuccess:
                   true)); // Kiểm tra nếu không còn thẻ nào chưa được ghép
+
+          // Phát âm thanh khi hoàn thành level
+          audioService.levelSuccessSound();
         }
       } else {
         await Future.delayed(const Duration(
@@ -95,7 +106,7 @@ extension PlayerBlocExtension on PlayerBloc {
       PlayerOnTapNextEvent event, Emitter<PlayerState> emitter) async {
     final levelData =
         await levelService.getDataLevelByLevel(event.levelModel.level);
-
+    audioService.tapCardSound();
     if (levelData == null) {
       await levelService.addLevel(event.levelModel);
     } else {

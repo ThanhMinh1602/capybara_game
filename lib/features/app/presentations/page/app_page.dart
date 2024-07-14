@@ -16,9 +16,9 @@ class _AppState extends State<App> {
   @override
   void initState() {
     Future.delayed(
-     const Duration(seconds: 3),
+      const Duration(seconds: 3),
       () {
-        AudioManager().playBgm();
+        AudioService().playBgm();
       },
     );
     super.initState();

@@ -61,6 +61,21 @@ class $AssetsImagesGen {
   /// File path: assets/images/map.png
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
+  /// File path: assets/images/map1.png
+  AssetGenImage get map1 => const AssetGenImage('assets/images/map1.png');
+
+  /// File path: assets/images/map2.png
+  AssetGenImage get map2 => const AssetGenImage('assets/images/map2.png');
+
+  /// File path: assets/images/map3.png
+  AssetGenImage get map3 => const AssetGenImage('assets/images/map3.png');
+
+  /// File path: assets/images/map4.png
+  AssetGenImage get map4 => const AssetGenImage('assets/images/map4.png');
+
+  /// File path: assets/images/map5.png
+  AssetGenImage get map5 => const AssetGenImage('assets/images/map5.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         bgr1,
@@ -72,7 +87,12 @@ class $AssetsImagesGen {
         cloudSettingBottom,
         functionAccount,
         logo,
-        map
+        map,
+        map1,
+        map2,
+        map3,
+        map4,
+        map5
       ];
 }
 

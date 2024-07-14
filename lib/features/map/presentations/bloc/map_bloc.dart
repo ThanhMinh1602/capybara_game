@@ -14,6 +14,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 }
 
 extension MapBlocExtension on MapBloc {
+  void onInit(MapEvent event, Emitter<MapState> emitter) {
+    
+  }
   void onChooseLevel(ChooseLevelEvent event, Emitter<MapState> emitter) {
     appNavigator.push(screen: ScreenType.player(event.levelNumber));
   }

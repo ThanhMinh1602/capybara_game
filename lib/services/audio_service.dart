@@ -1,10 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 
-class AudioManager {
-  static final AudioManager _instance = AudioManager._internal();
-  factory AudioManager() => _instance;
+class AudioService {
+  static final AudioService _instance = AudioService._internal();
+  factory AudioService() => _instance;
 
-  AudioManager._internal();
+  AudioService._internal();
 
   final AudioPlayer _grAudio = AudioPlayer();
   final AudioPlayer _tapGameSound = AudioPlayer();
@@ -12,10 +12,10 @@ class AudioManager {
   final AudioPlayer _tapCardSoundSuccess = AudioPlayer();
   final AudioPlayer _levelSuccessSound = AudioPlayer();
 
-  //bgrsound
+  // Background sound
   void playBgm() {
     String path = "sounds/bgr_audio.mp3";
-    _grAudio.play(AssetSource(path));
+    _grAudio.play(AssetSource(path), volume: 50);
     _grAudio.setReleaseMode(ReleaseMode.loop);
   }
 
@@ -23,29 +23,48 @@ class AudioManager {
     _grAudio.stop();
   }
 
-//tapGameSound
-  void tapGameSound() {
-    String path = "sounds/tap_button_2.mp3";
-    _tapGameSound.play(AssetSource(path));
+  // Stop all sounds
+  Future<void> stopSound() async {
+    await _tapGameSound.stop();
+    await _tapCardSound.stop();
+    await _tapCardSoundSuccess.stop();
+    await _levelSuccessSound.stop();
   }
 
-//tap Card Sound
-  void tapCardSound() {
+  // Play tap game sound
+  Future<void> tapGameSound() async {
+    String path = "sounds/tap_button_3.mp3";
+    await stopSound();
+    await _tapGameSound.play(AssetSource(path));
+  }
+
+  // Play tap card sound
+  Future<void> tapCardSound() async {
     String path = "sounds/tap_card.mp3";
-    _tapCardSound.play(AssetSource(path));
+    await stopSound();
+    await _tapCardSound.play(AssetSource(path));
   }
 
-  void tapCardSoundSuccess() {
+  // Play tap card success sound
+  Future<void> tapCardSoundSuccess() async {
     String path = "sounds/tap_card_success.mp3";
-    _tapCardSoundSuccess.play(AssetSource(path));
+    await stopSound();
+    await _tapCardSoundSuccess.play(AssetSource(path));
   }
 
-  void levelSuccessSound() {
+  // Play level success sound
+  Future<void> levelSuccessSound() async {
     String path = "sounds/success_sound.mp3";
-    _levelSuccessSound.play(AssetSource(path));
+    await stopSound();
+    await _levelSuccessSound.play(AssetSource(path));
   }
 
-  void dispose() {
-    _grAudio.dispose();
+  // Dispose all audio players
+  Future<void> dispose() async {
+    await _grAudio.dispose();
+    await _tapGameSound.dispose();
+    await _tapCardSound.dispose();
+    await _tapCardSoundSuccess.dispose();
+    await _levelSuccessSound.dispose();
   }
 }

@@ -1,4 +1,4 @@
-import 'package:capybara_game/model/level_model.dart';
+import 'package:capybara_game/model/player_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -21,7 +21,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'game_database.db');
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _onCreate,
     );
   }
@@ -38,18 +38,18 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<int> insertLevel(LevelModel level) async {
+  Future<int> insertLevel(PlayerModel level) async {
     Database db = await database;
     return await db.insert('levels', level.toJson());
   }
 
-  Future<List<LevelModel>> getLevels() async {
+  Future<List<PlayerModel>> getLevels() async {
     Database db = await database;
     List<Map<String, dynamic>> maps = await db.query('levels');
-    return maps.map((map) => LevelModel.fromJson(map)).toList();
+    return maps.map((map) => PlayerModel.fromJson(map)).toList();
   }
 
-  Future<int> updateLevel(LevelModel level) async {
+  Future<int> updateLevel(PlayerModel level) async {
     Database db = await database;
     return await db.update(
       'levels',
@@ -73,7 +73,7 @@ class DatabaseHelper {
     return await db.delete('levels');
   }
 
-  Future<LevelModel?> getLevelByLevel(int level) async {
+  Future<PlayerModel?> getLevelByLevel(int level) async {
     Database db = await database;
     List<Map<String, dynamic>> maps = await db.query(
       'levels',
@@ -81,7 +81,7 @@ class DatabaseHelper {
       whereArgs: [level],
     );
     if (maps.isNotEmpty) {
-      return LevelModel.fromJson(maps.first);
+      return PlayerModel.fromJson(maps.first);
     }
     return null; // Trả về null nếu không tìm thấy
   }

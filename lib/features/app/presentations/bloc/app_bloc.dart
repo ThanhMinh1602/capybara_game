@@ -27,9 +27,9 @@ extension AppBlocExtension on AppBloc {
   void onSetMusicState(StateMusicEvent event, Emitter<AppState> emitter) {
     bool musicState = event.isPlayMusic;
     if (musicState == true) {
-      AudioManager().stopBgm(); // Dừng phát nhạc nền nếu đang phát
+      AudioService().stopBgm(); // Dừng phát nhạc nền nếu đang phát
     } else {
-      AudioManager().playBgm(); // Phát nhạc nền nếu không phát
+      AudioService().playBgm(); // Phát nhạc nền nếu không phát
     }
     emitter(state.copyWith(music: !musicState)); // Cập nhật trạng thái âm nhạc
   }

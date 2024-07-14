@@ -5,7 +5,7 @@ import 'package:capybara_game/features/player/presentations/bloc/player_bloc.dar
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/grid_config_model.dart';
-import 'package:capybara_game/model/level_model.dart';
+import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/player_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,12 +45,12 @@ class _PlayerWidgetState extends State<PlayerWidget> {
             onTapMenu: () {},
             onTapRetry: () {
               context.read<PlayerBloc>().add(PlayerEvent.onTapRetry(
-                  LevelModel(level: widget.level, ratingStar: 0, tries: 0)));
+                  PlayerModel(level: widget.level, ratingStar: 0, tries: 0)));
             },
             onTapNext: () {
               context.read<PlayerBloc>().add(
                     PlayerEvent.onTapNext(
-                      LevelModel(
+                      PlayerModel(
                         level: widget.level,
                         ratingStar: 3,
                         tries: state.tries,

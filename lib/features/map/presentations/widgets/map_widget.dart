@@ -2,7 +2,9 @@ import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/components/hearder/map_header.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/map/presentations/bloc/map_bloc.dart';
+import 'package:capybara_game/features/map/presentations/widgets/data_map.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
+import 'package:capybara_game/model/level_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,30 +17,10 @@ class MapWidget extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SingleChildScrollView(
+          PageView(
+            scrollDirection: Axis.vertical,
             reverse: true,
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      Assets.images.map.path,
-                      fit: BoxFit.cover,
-                    ),
-                    Positioned(
-                      bottom: 100.h,
-                      left: 0,
-                      right: 40.w,
-                      child: _buildLevel(
-                        context,
-                        level: 1,
-                        ratingStar: 3,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            children: maps.map((map) => _buildMapPage(context, map)).toList(),
           ),
           const MapHeader(),
           const SettingButton()
@@ -47,45 +29,57 @@ class MapWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildLevel(
-    BuildContext context, {
-    int? ratingStar,
-    required int level,
-  }) {
-    int stars = (ratingStar != null && ratingStar >= 1 && ratingStar <= 3)
-        ? ratingStar
-        : 1;
-    return GestureDetector(
-      onTap: () {
-        context.read<MapBloc>().add(MapEvent.chooseLevel(level));
-      },
-      child: Center(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                  stars,
+  Widget _buildMapPage(BuildContext context, MapData map) {
+    return Stack(
+      children: [
+        Image.asset(
+          map.imagePath,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
+        ...map.levels.map((level) => _buildLevel(context, level)).toList(),
+      ],
+    );
+  }
+
+  Widget _buildLevel(BuildContext context, LevelModel level) {
+    return Positioned(
+      bottom: level.bottom,
+      left: level.left,
+      child: GestureDetector(
+        onTap: () {
+          context.read<MapBloc>().add(MapEvent.chooseLevel(level.level));
+        },
+        child: Center(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  level.ratingStar,
                   (index) => Image.asset(
-                        Assets.icons.png.star.path,
-                        width: 70.w,
-                      )),
-            ),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Image.asset(
-                  Assets.icons.png.levelIcon.path,
-                  width: 183.w,
-                  height: 176.h,
+                    Assets.icons.png.star.path,
+                    width: 50.w,
+                  ),
                 ),
-                Text(
-                  '$level',
-                  style: AppStyle.kanit_bold_102,
-                ),
-              ],
-            ),
-          ],
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    Assets.icons.png.levelIcon.path,
+                    width: 140.w,
+                    height: 140.h,
+                  ),
+                  Text(
+                    '${level.level}',
+                    style: AppStyle.kanit_bold_102,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
