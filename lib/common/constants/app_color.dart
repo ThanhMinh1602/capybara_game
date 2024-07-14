@@ -24,6 +24,8 @@ class AppColor {
   static const c_C6F0B7 = Color(0xffC6F0B7);
   static const c_BBE37B = Color(0xffBBE37B);
   static const c_909090 = Color(0xff909090);
+  static const c_EFF2F6 = Color(0xffEFF2F6);
+  static const c_C6E4FE = Color(0xffC6E4FE);
 //boxShadow
   static final boxShadow = BoxShadow(
       blurRadius: 4,

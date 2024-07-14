@@ -1,4 +1,4 @@
-import 'package:capybara_game/common/components/dialog/setting_dialog.dart';
+import 'package:capybara_game/common/components/dialog/app_dialog.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +15,7 @@ class SettingButton extends StatelessWidget {
         left: 10.w,
         child: GestureDetector(
           onTap: () {
-            AppSettingDialog.settingDialog(context);
+            AppDialog.settingDialog(context);
             // AudioManager().soundTap();
           },
           child: Image.asset(

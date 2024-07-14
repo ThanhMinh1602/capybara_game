@@ -139,6 +139,10 @@ class $AssetsIconsPngGen {
   AssetGenImage get crownIcon =>
       const AssetGenImage('assets/icons/png/crown_icon.png');
 
+  /// File path: assets/icons/png/crown_icon_yl.png
+  AssetGenImage get crownIconYl =>
+      const AssetGenImage('assets/icons/png/crown_icon_yl.png');
+
   /// File path: assets/icons/png/gold.png
   AssetGenImage get gold => const AssetGenImage('assets/icons/png/gold.png');
 
@@ -181,6 +185,10 @@ class $AssetsIconsPngGen {
   AssetGenImage get playerStar =>
       const AssetGenImage('assets/icons/png/player_star.png');
 
+  /// File path: assets/icons/png/question_mark.png
+  AssetGenImage get questionMark =>
+      const AssetGenImage('assets/icons/png/question_mark.png');
+
   /// File path: assets/icons/png/setting_icon.png
   AssetGenImage get settingIcon =>
       const AssetGenImage('assets/icons/png/setting_icon.png');
@@ -211,6 +219,7 @@ class $AssetsIconsPngGen {
         circlePlusIcon,
         closeIcon,
         crownIcon,
+        crownIconYl,
         gold,
         heart,
         helpIcon,
@@ -222,6 +231,7 @@ class $AssetsIconsPngGen {
         nextIcon,
         pauseIcon,
         playerStar,
+        questionMark,
         settingIcon,
         speakerIcon,
         speakerOffIcon,

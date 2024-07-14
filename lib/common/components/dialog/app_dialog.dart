@@ -3,14 +3,11 @@ import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/app/presentations/bloc/app_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
-import 'package:capybara_game/services/audio_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppSettingDialog {
+class AppDialog {
   static Future<void> settingDialog(BuildContext context) {
     return showDialog(
       context: context,
@@ -18,6 +15,7 @@ class AppSettingDialog {
         return BlocBuilder<AppBloc, AppState>(
           builder: (context, state) {
             return CustomDialog(
+              title: 'Cài đặt',
               child: IndexedStack(
                 index: state.option,
                 children: [
@@ -30,6 +28,151 @@ class AppSettingDialog {
           },
         );
       },
+    );
+  }
+
+  static Future<void> successDialog(
+    BuildContext context, {
+    required String level,
+    required String tries,
+    required String oldTries,
+    required int ratingStar,
+    void Function()? onTapMenu,
+    void Function()? onTapRetry,
+    void Function()? onTapNext,
+  }) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return BlocBuilder<AppBloc, AppState>(
+          builder: (context, state) {
+            return CustomDialog(
+                title: 'Level $level',
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        for (int i = 0; i < ratingStar; i++)
+                          Image.asset(
+                            Assets.icons.png.playerStar.path,
+                            width: 91.w,
+                            height: 91.h,
+                          ),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      'ĐÃ MỞ',
+                      style: AppStyle.kanit_regular_34.copyWith(
+                          fontWeight: FontWeight.w900,
+                          fontStyle: FontStyle.italic),
+                    ),
+                    Container(
+                      width: 267.w,
+                      height: 60.h,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.r),
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.19, 0.88],
+                          colors: [
+                            AppColor.c_C6F0B7,
+                            AppColor.c_BBE37B,
+                          ],
+                        ),
+                      ),
+                      child: Text(tries,
+                          style: AppStyle.kanit_medium_38.copyWith(
+                              fontSize: 40.sp, fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(height: 30.h),
+                    Image.asset(Assets.icons.png.crownIconYl.path, width: 77.w),
+                    SizedBox(height: 5.h),
+                    Container(
+                      width: 192.w,
+                      height: 60.h,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.r),
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.19, 0.88],
+                          colors: [
+                            AppColor.c_C6F0B7,
+                            AppColor.c_BBE37B,
+                          ],
+                        ),
+                      ),
+                      child: Text(oldTries,
+                          style: AppStyle.kanit_medium_38.copyWith(
+                              fontSize: 40.sp, fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(height: 90.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildButtonSuccess(
+                            icon: Icons.menu, title: 'MENU', onTap: onTapMenu),
+                        _buildButtonSuccess(
+                            icon: Icons.restart_alt_outlined,
+                            title: 'RETRY',
+                            onTap: onTapRetry),
+                        _buildButtonSuccess(
+                            icon: Icons.arrow_circle_right_outlined,
+                            title: 'NEXT',
+                            onTap: onTapNext),
+                      ],
+                    )
+                  ],
+                ));
+          },
+        );
+      },
+    );
+  }
+
+  static Widget _buildButtonSuccess(
+      {required IconData icon, required String title, void Function()? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 100.w,
+        height: 84.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0.r),
+          border: Border.all(
+            color: AppColor.c_003B81,
+            width: 2,
+          ),
+          gradient: const RadialGradient(
+            stops: [58 / 100, 1],
+            colors: [AppColor.c_EFF2F6, AppColor.c_C3D3FF],
+          ),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 45.w,
+              color: AppColor.c_003B81,
+            ),
+            Text(
+              title,
+              style: AppStyle.kanit_semibold_19,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -138,8 +281,10 @@ class _MainSettingContent extends StatelessWidget {
                           .read<AppBloc>()
                           .add(AppEvent.stateSound(state.sound));
                     },
-                    child: Image.asset( state.sound
-                            ? Assets.icons.png.speakerIcon.path :Assets.icons.png.speakerOffIcon.path ,
+                    child: Image.asset(
+                        state.sound
+                            ? Assets.icons.png.speakerIcon.path
+                            : Assets.icons.png.speakerOffIcon.path,
                         width: 77.w));
               },
             ),
