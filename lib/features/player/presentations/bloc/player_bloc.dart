@@ -21,12 +21,14 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     required this.appNavigator,
     required this.playerService,
   }) : super((const PlayerState())) {
-    on<PlayerInitEvent>(_onInit);
-    on<PlayerTapCardEvent>(_onTapCard);
-    on<PlayerOnTapNextEvent>(onTapNextLevel);
-    on<PlayerOnTapRetryEvent>(onTapRetryGame);
+    on(_onInit);
+    on(_onTapCard);
+    on(onTapNextLevel);
+    on(onTapRetryGame);
   }
+}
 
+extension PlayerBlocExtension on PlayerBloc {
   Future<void> _onInit(
       PlayerInitEvent event, Emitter<PlayerState> emitter) async {
     final dataCard = playerService.generateCardList(event.level);

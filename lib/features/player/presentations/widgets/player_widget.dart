@@ -4,6 +4,7 @@ import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/player/presentations/bloc/player_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/card_model.dart';
+import 'package:capybara_game/model/grid_config_model.dart';
 import 'package:capybara_game/model/level_model.dart';
 import 'package:capybara_game/services/player_service.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PlayerWidget extends StatefulWidget {
   final int level;
+
   const PlayerWidget({super.key, required this.level});
 
   @override
@@ -21,6 +23,7 @@ class PlayerWidget extends StatefulWidget {
 class _PlayerWidgetState extends State<PlayerWidget> {
   @override
   void initState() {
+    // Khởi tạo PlayerBloc với sự kiện init
     context.read<PlayerBloc>().add(PlayerEvent.init(widget.level));
     super.initState();
   }
@@ -30,6 +33,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     return BlocListener<PlayerBloc, PlayerState>(
       listener: (context, state) {
         if (state.isSuccess) {
+          // Hiển thị hộp thoại thành công khi trò chơi hoàn thành
           AppDialog.successDialog(
             context,
             level: widget.level.toString(),
@@ -113,46 +117,64 @@ class _PlayerWidgetState extends State<PlayerWidget> {
               ],
             ),
           ),
-          Expanded(
-            child: GridView.builder(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 30.w,
-                  vertical: level == 1
-                      ? 350.h
-                      : level == 2
-                          ? 230.h
-                          : 120.h),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: level == 1 ? 2 : config.gridSize,
-              ),
-              itemCount: datas.length,
-              itemBuilder: (context, index) {
-                CardModel card = datas[index];
-                if (card.isMatched) {
-                  return const SizedBox.shrink();
-                }
-                return GestureDetector(
-                  onTap: () {
-                    context
-                        .read<PlayerBloc>()
-                        .add(PlayerEvent.tapCard(card, state.tries, level));
-                  },
-                  child: Card(
-                    color: AppColor.c_70C0D4,
-                    child: card.isFlipped
-                        ? Image.asset(datas[index].identifier)
-                        : Image.asset(
-                            Assets.icons.png.questionMark.path,
-                            width: 20.w,
-                          ),
-                  ),
-                );
-              },
-            ),
-          )
+          _buildGridCard(level, config, datas, state)
         ],
       );
     });
+  }
+
+  Widget _buildGridCard(int level, GridConfigModel config,
+      List<CardModel> datas, PlayerState state) {
+    return Expanded(
+      child: GridView.builder(
+        padding: EdgeInsets.symmetric(
+            horizontal: 30.w,
+            vertical: level == 1
+                ? 350.h
+                : level == 2
+                    ? 230.h
+                    : 120.h),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: level == 1 ? 2 : config.gridSize,
+          crossAxisSpacing: 20.w,
+          mainAxisSpacing: 20.h,
+        ),
+        itemCount: datas.length,
+        itemBuilder: (context, index) {
+          CardModel card = datas[index];
+          if (card.isMatched) {
+            return const SizedBox.shrink();
+          }
+          return _buildCardItem(context, card, state, level, datas, index);
+        },
+      ),
+    );
+  }
+
+  Widget _buildCardItem(BuildContext context, CardModel card, PlayerState state,
+      int level, List<CardModel> datas, int index) {
+    return GestureDetector(
+      onTap: () {
+        context
+            .read<PlayerBloc>()
+            .add(PlayerEvent.tapCard(card, state.tries, level));
+      },
+      child: Container(
+        padding: EdgeInsets.all(card.isFlipped ? 0 : 70.h),
+        decoration: BoxDecoration(
+            boxShadow: [
+              AppColor.boxShadow,
+            ],
+            color: AppColor.c_C6E4FE.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(35.r)),
+        child: card.isFlipped
+            ? Image.asset(datas[index].identifier)
+            : Image.asset(
+                Assets.icons.png.questionMark.path,
+                width: 20.w,
+              ),
+      ),
+    );
   }
 
   Widget _buildBottomHeader({
