@@ -85,11 +85,35 @@ class $AssetsSoundsGen {
   /// File path: assets/sounds/bgr_audio1.mp3
   String get bgrAudio1 => 'assets/sounds/bgr_audio1.mp3';
 
-  /// File path: assets/sounds/click_sound.mp3
-  String get clickSound => 'assets/sounds/click_sound.mp3';
+  /// File path: assets/sounds/success_sound.mp3
+  String get successSound => 'assets/sounds/success_sound.mp3';
+
+  /// File path: assets/sounds/tap_button.mp3
+  String get tapButton => 'assets/sounds/tap_button.mp3';
+
+  /// File path: assets/sounds/tap_button_2.mp3
+  String get tapButton2 => 'assets/sounds/tap_button_2.mp3';
+
+  /// File path: assets/sounds/tap_button_3.mp3
+  String get tapButton3 => 'assets/sounds/tap_button_3.mp3';
+
+  /// File path: assets/sounds/tap_card.mp3
+  String get tapCard => 'assets/sounds/tap_card.mp3';
+
+  /// File path: assets/sounds/tap_card_success.mp3
+  String get tapCardSuccess => 'assets/sounds/tap_card_success.mp3';
 
   /// List of all assets
-  List<String> get values => [bgrAudio, bgrAudio1, clickSound];
+  List<String> get values => [
+        bgrAudio,
+        bgrAudio1,
+        successSound,
+        tapButton,
+        tapButton2,
+        tapButton3,
+        tapCard,
+        tapCardSuccess
+      ];
 }
 
 class $AssetsIconsPngGen {
