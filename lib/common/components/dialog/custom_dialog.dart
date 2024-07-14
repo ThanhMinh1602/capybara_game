@@ -27,7 +27,7 @@ class CustomDialog extends StatelessWidget {
           ),
           child: SizedBox(
             width: 605.w,
-            height: 914.h,
+            height: title == 'PAUSE' ? 600.h : 914.h,
             child: Stack(
               children: [
                 Positioned(
@@ -78,8 +78,10 @@ class CustomDialog extends StatelessWidget {
                             .read<AppBloc>()
                             .add(const AppEvent.chooseOptionSetting(0));
                       },
-                      child: Image.asset(Assets.icons.png.closeIcon.path,
-                          width: 77.0.w)),
+                      child: title == 'PAUSE'
+                          ? null
+                          : Image.asset(Assets.icons.png.closeIcon.path,
+                              width: 77.0.w)),
                 ),
                 Positioned(
                   bottom: 0,

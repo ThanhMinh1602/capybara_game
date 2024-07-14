@@ -141,6 +141,47 @@ class AppDialog {
     );
   }
 
+  static Future<void> pauseDialog(
+    BuildContext context, {
+    void Function()? onTapBackHome,
+    void Function()? onTapRetry,
+    void Function()? onTapContinute,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return BlocBuilder<AppBloc, AppState>(
+          builder: (context, state) {
+            return CustomDialog(
+                title: 'PAUSE',
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildButtonSuccess(
+                            icon: Icons.play_arrow,
+                            title: 'CONTINUTE',
+                            onTap: onTapContinute),
+                        _buildButtonSuccess(
+                            icon: Icons.home,
+                            title: 'HOME',
+                            onTap: onTapBackHome),
+                        _buildButtonSuccess(
+                            icon: Icons.restart_alt_outlined,
+                            title: 'RETRY',
+                            onTap: onTapRetry),
+                      ],
+                    ),
+                  ],
+                ));
+          },
+        );
+      },
+    );
+  }
+
   static Widget _buildButtonSuccess(
       {required IconData icon, required String title, void Function()? onTap}) {
     return GestureDetector(

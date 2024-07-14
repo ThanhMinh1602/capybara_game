@@ -45,13 +45,14 @@ class AppNavigator {
     required ScreenType screen,
     NavigationType? type,
     TO? result,
+    required PageTransitionType pageTransitionType,
   }) async {
     return _getNavigator(type: type).pushReplacement(
       PageTransition(
         settings: RouteSettings(
           name: screen.toString(),
         ),
-        type: PageTransitionType.rightToLeft,
+        type: pageTransitionType,
         child: ScreenTypeHelper.page(screen),
       ),
       result: result,

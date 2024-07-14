@@ -1,6 +1,9 @@
+import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/components/dialog/app_dialog.dart';
 import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
+import 'package:capybara_game/common/extensions/build_context_extension.dart';
+import 'package:capybara_game/common/navigator/navigator.dart';
 import 'package:capybara_game/features/player/presentations/bloc/player_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/card_model.dart';
@@ -28,12 +31,20 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     super.initState();
   }
 
+  void onTapRetry() {
+    context.read<PlayerBloc>().add(PlayerEvent.onTapRetry(
+        PlayerModel(level: widget.level, ratingStar: 0, tries: 0)));
+  }
+
+  void onTapMenu() {
+    context.getNavigator().popToScreen(screen: const ScreenType.start());
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<PlayerBloc, PlayerState>(
       listener: (context, state) {
         if (state.isSuccess) {
-          // Hiển thị hộp thoại thành công khi trò chơi hoàn thành
           AppDialog.successDialog(
             context,
             level: widget.level.toString(),
@@ -42,11 +53,8 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                 : state.oldTries.toString(),
             tries: state.tries.toString(),
             ratingStar: state.ratingStar,
-            onTapMenu: () {},
-            onTapRetry: () {
-              context.read<PlayerBloc>().add(PlayerEvent.onTapRetry(
-                  PlayerModel(level: widget.level, ratingStar: 0, tries: 0)));
-            },
+            onTapMenu: onTapMenu,
+            onTapRetry: onTapRetry,
             onTapNext: () {
               context.read<PlayerBloc>().add(
                     PlayerEvent.onTapNext(
@@ -66,6 +74,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           children: [
             _buildPlayerBgr(),
             _buildPlayerBody(),
+            const SettingButton()
           ],
         ),
       ),
@@ -274,10 +283,22 @@ class _PlayerWidgetState extends State<PlayerWidget> {
               style: AppStyle.kanit_bold_61,
             ),
           ),
-          Image.asset(
-            Assets.icons.png.pauseIcon.path,
-            width: 77.w,
-            height: 77.w,
+          GestureDetector(
+            onTap: () {
+              AppDialog.pauseDialog(
+                context,
+                onTapBackHome: onTapMenu,
+                onTapContinute: () {
+                  context.getNavigator().pop();
+                },
+                onTapRetry: onTapRetry,
+              );
+            },
+            child: Image.asset(
+              Assets.icons.png.pauseIcon.path,
+              width: 77.w,
+              height: 77.w,
+            ),
           ),
         ],
       ),

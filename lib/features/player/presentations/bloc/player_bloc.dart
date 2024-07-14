@@ -122,11 +122,6 @@ extension PlayerBlocExtension on PlayerBloc {
       screen: ScreenType.player(event.levelModel.level + 1),
       pageTransitionType: PageTransitionType.fade,
     );
-
-    final levels = await levelService.getAllLevels();
-    for (var element in levels) {
-      print(element.toJson());
-    }
   }
 
   void onTapRetryGame(
