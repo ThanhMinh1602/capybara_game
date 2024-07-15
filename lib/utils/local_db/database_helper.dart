@@ -21,7 +21,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'game_database.db');
     return await openDatabase(
       path,
-      version: 3,
+      version: 7,
       onCreate: _onCreate,
     );
   }
@@ -29,13 +29,20 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE levels (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         level INTEGER,
         tries INTEGER,
-        score INTEGER,
         ratingStar INTEGER
       )
     ''');
+    await _insertInitialLevels(db);
+  }
+
+  Future<void> _insertInitialLevels(Database db) async {
+    for (int i = 1; i <= 50; i++) {
+      PlayerModel level = PlayerModel(level: i, tries: 0, ratingStar: 0);
+      await db.insert('levels', level.toJson());
+    }
   }
 
   Future<int> insertLevel(PlayerModel level) async {

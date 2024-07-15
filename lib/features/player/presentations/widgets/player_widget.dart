@@ -60,7 +60,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                     PlayerEvent.onTapNext(
                       PlayerModel(
                         level: widget.level,
-                        ratingStar: 3,
+                        ratingStar: state.ratingStar,
                         tries: state.tries,
                       ),
                     ),
