@@ -50,46 +50,53 @@ class MapWidget extends StatelessWidget {
 
   Widget _buildLevelItem(BuildContext context, PlayerModel levelModel) {
     final position = levelItemPosition(levelModel.level);
-    return Positioned(
-      bottom: position['bottom'],
-      left: position['left'],
-      child: GestureDetector(
-        onTap: () {
-          context.read<MapBloc>().add(MapEvent.chooseLevel(levelModel.level));
-        },
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+
+    return BlocBuilder<MapBloc, MapState>(
+      builder: (context, state) {
+        return Positioned(
+          bottom: position['bottom'],
+          left: position['left'],
+          child: GestureDetector(
+            onTap: () {
+              context
+                  .read<MapBloc>()
+                  .add(MapEvent.chooseLevel(levelModel.level));
+            },
+            child: Center(
+              child: Column(
                 children: [
-                  for (int i = 1; i <= levelModel.ratingStar; i++)
-                    Image.asset(
-                      Assets.icons.png.star.path,
-                      width: 50.w,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (int i = 1; i <= levelModel.ratingStar; i++)
+                        Image.asset(
+                          Assets.icons.png.star.path,
+                          width: 50.w,
+                        ),
+                    ],
+                  ),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        levelModel.ratingStar != 0
+                            ? Assets.icons.png.levelIcon.path
+                            : Assets.icons.png.levelLock.path,
+                        width: 140.w,
+                        height: 140.h,
+                      ),
+                      Text(
+                        '${levelModel.level}',
+                        style: AppStyle.kanit_bold_102,
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    levelModel.ratingStar == 0
-                        ? Assets.icons.png.levelLock.path
-                        : Assets.icons.png.levelIcon.path,
-                    width: 140.w,
-                    height: 140.h,
-                  ),
-                  Text(
-                    '${levelModel.level}',
-                    style: AppStyle.kanit_bold_102,
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

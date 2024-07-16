@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/common/navigator/navigator.dart';
-import 'package:capybara_game/model/level_model.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/level_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

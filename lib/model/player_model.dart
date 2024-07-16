@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class PlayerModel {
   final int level;
   final int tries;

@@ -169,19 +169,25 @@ class _PlayerWidgetState extends State<PlayerWidget> {
             .add(PlayerEvent.tapCard(card, state.tries, level));
       },
       child: Container(
-        padding: EdgeInsets.all(card.isFlipped ? 0 : 70.h),
         decoration: BoxDecoration(
-            boxShadow: [
-              AppColor.boxShadow,
-            ],
-            color: AppColor.c_C6E4FE.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(35.r)),
-        child: card.isFlipped
-            ? Image.asset(datas[index].identifier)
-            : Image.asset(
+          boxShadow: [
+            AppColor.boxShadow,
+          ],
+          color: AppColor.c_C6E4FE.withOpacity(0.8),
+          borderRadius: BorderRadius.circular(35.r),
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return Image.asset(
                 Assets.icons.png.questionMark.path,
-                width: 20.w,
-              ),
+                width: constraints.maxWidth *0.3,
+                fit: BoxFit.scaleDown,
+              );
+            },
+          ),
+        ),
       ),
     );
   }
