@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class PlayerModel {
   final int level;
   final int tries;
@@ -8,6 +10,18 @@ class PlayerModel {
     required this.tries,
     required this.ratingStar,
   });
+
+  PlayerModel copyWith({
+    int? level,
+    int? tries,
+    int? ratingStar,
+  }) {
+    return PlayerModel(
+      level: level ?? this.level,
+      tries: tries ?? this.tries,
+      ratingStar: ratingStar ?? this.ratingStar,
+    );
+  }
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
     return PlayerModel(

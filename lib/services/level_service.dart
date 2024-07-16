@@ -27,4 +27,8 @@ class LevelService {
   Future<void> deleteAllLevel() async {
     await _databaseHelper.deleteAllLevels();
   }
+
+  Future<void> getListLevelByRatingStar(int star) async {
+    await _databaseHelper.getListLevelByRatingStar(star);
+  }
 }

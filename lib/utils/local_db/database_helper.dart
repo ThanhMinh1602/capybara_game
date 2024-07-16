@@ -92,4 +92,14 @@ class DatabaseHelper {
     }
     return null; // Trả về null nếu không tìm thấy
   }
+
+  Future<List<PlayerModel>> getListLevelByRatingStar(int ratingStar) async {
+    Database db = await database;
+    List<Map<String, dynamic>> maps = await db.query(
+      'levels',
+      where: 'ratingStar = ?',
+      whereArgs: [ratingStar],
+    );
+    return maps.map((map) => PlayerModel.fromJson(map)).toList();
+  }
 }

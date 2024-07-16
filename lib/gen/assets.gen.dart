@@ -185,6 +185,10 @@ class $AssetsIconsPngGen {
   AssetGenImage get levelIcon =>
       const AssetGenImage('assets/icons/png/level_icon.png');
 
+  /// File path: assets/icons/png/level_lock.png
+  AssetGenImage get levelLock =>
+      const AssetGenImage('assets/icons/png/level_lock.png');
+
   /// File path: assets/icons/png/music_icon.png
   AssetGenImage get musicIcon =>
       const AssetGenImage('assets/icons/png/music_icon.png');
@@ -246,6 +250,7 @@ class $AssetsIconsPngGen {
         helpNumber,
         instructIcon,
         levelIcon,
+        levelLock,
         musicIcon,
         musicOffIcon,
         nextIcon,

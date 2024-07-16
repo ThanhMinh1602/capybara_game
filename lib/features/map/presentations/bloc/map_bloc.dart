@@ -23,8 +23,13 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 extension MapBlocExtension on MapBloc {
   Future<void> onInit(MapEvent event, Emitter<MapState> emitter) async {
     List<PlayerModel> dataLevels = await levelService.getAllLevels();
-    print(dataLevels[5].ratingStar);
-    emitter(state.copyWith(dataLevels: dataLevels));
+    List<PlayerModel> listLevelUnlock = dataLevels
+        .where(
+          (element) => element.ratingStar != 0,
+        )
+        .toList();
+    emitter(state.copyWith(
+        dataLevels: dataLevels, dataLevelUnlock: listLevelUnlock));
   }
 
   void onChooseLevel(ChooseLevelEvent event, Emitter<MapState> emitter) {
