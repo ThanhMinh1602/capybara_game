@@ -3,8 +3,6 @@ import 'package:capybara_game/common/components/dialog/app_dialog.dart';
 import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/common/extensions/build_context_extension.dart';
-import 'package:capybara_game/common/navigator/navigator.dart';
-import 'package:capybara_game/features/map/presentations/bloc/map_bloc.dart';
 import 'package:capybara_game/features/player/presentations/bloc/player_bloc.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/card_model.dart';
@@ -14,7 +12,6 @@ import 'package:capybara_game/services/player_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:page_transition/page_transition.dart';
 
 class PlayerWidget extends StatefulWidget {
   final int level;
@@ -28,7 +25,6 @@ class PlayerWidget extends StatefulWidget {
 class _PlayerWidgetState extends State<PlayerWidget> {
   @override
   void initState() {
-    // Khởi tạo PlayerBloc với sự kiện init
     context.read<PlayerBloc>().add(PlayerEvent.init(widget.level));
     super.initState();
   }

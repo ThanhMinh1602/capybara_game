@@ -223,20 +223,37 @@ class _VolumeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Âm lượng', style: AppStyle.settingListTitle),
-        SizedBox(height: 20.0.h),
-        const _SliderVolume(title: 'Loa', value: 68),
-        const _SliderVolume(title: 'Âm nhạc', value: 68),
+        BlocBuilder<AppBloc, AppState>(builder: (context, state) {
+          return _SliderVolume(
+            title: 'Music',
+            value: state.bgmVolume,
+            onChanged: (value) {
+              context.read<AppBloc>().add(AppEvent.changeBgmVolume(value));
+            },
+          );
+        }),
+        BlocBuilder<AppBloc, AppState>(builder: (context, state) {
+          return _SliderVolume(
+            title: 'Sound',
+            value: state.effectsVolume,
+            onChanged: (value) {
+              context.read<AppBloc>().add(AppEvent.changeEffectsVolume(value));
+            },
+          );
+        })
       ],
     );
   }
 }
 
+// ignore: unused_element
 class _SliderVolume extends StatelessWidget {
   final String title;
   final double value;
 
-  const _SliderVolume({required this.title, required this.value});
+  final void Function(double)? onChanged;
+  const _SliderVolume(
+      {required this.title, required this.value, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -251,14 +268,15 @@ class _SliderVolume extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: Text('$value%', style: AppStyle.kanit_regular_34),
+              child: Text('${(value * 100).toInt()}%',
+                  style: AppStyle.kanit_regular_34),
             ),
           ),
           Slider(
             value: value,
-            min: 0,
-            max: 100,
-            onChanged: (newValue) {},
+            min: 0.1,
+            max: 1.0,
+            onChanged: onChanged,
           ),
         ],
       ),
@@ -304,10 +322,10 @@ class _MainSettingContent extends StatelessWidget {
                     onTap: () {
                       context
                           .read<AppBloc>()
-                          .add(AppEvent.stateMusic(state.music));
+                          .add(AppEvent.stateMusic(state.isPlayMusic));
                     },
                     child: Image.asset(
-                        state.music
+                        state.isPlayMusic
                             ? Assets.icons.png.musicIcon.path
                             : Assets.icons.png.musicOffIcon.path,
                         width: 77.w));
@@ -320,10 +338,10 @@ class _MainSettingContent extends StatelessWidget {
                     onTap: () {
                       context
                           .read<AppBloc>()
-                          .add(AppEvent.stateSound(state.sound));
+                          .add(AppEvent.stateSound(state.isPlaySound));
                     },
                     child: Image.asset(
-                        state.sound
+                        state.isPlaySound
                             ? Assets.icons.png.speakerIcon.path
                             : Assets.icons.png.speakerOffIcon.path,
                         width: 77.w));

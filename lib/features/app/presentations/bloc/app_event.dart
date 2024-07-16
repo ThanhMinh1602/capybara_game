@@ -7,4 +7,6 @@ class AppEvent with _$AppEvent {
       ChooseOptionSettingEvent;
   const factory AppEvent.stateMusic(bool isPlayMusic) = StateMusicEvent;
   const factory AppEvent.stateSound(bool isPlaySound) = StateSoundEvent;
+  const factory AppEvent.changeBgmVolume(double volume) = ChangeBgmVolumeEvent;
+  const factory AppEvent.changeEffectsVolume(double volume) = ChangeEffectsVolumeEvent;
 }

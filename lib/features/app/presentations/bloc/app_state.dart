@@ -4,7 +4,9 @@ part of 'app_bloc.dart';
 class AppState with _$AppState {
   const factory AppState({
     @Default(0) int option,
-    @Default(true) bool music,
-    @Default(true) bool sound,
+    @Default(true) bool isPlayMusic,
+    @Default(true) bool isPlaySound,
+    @Default(0.5) double bgmVolume,
+    @Default(0.5) double effectsVolume,
   }) = _AppState;
 }

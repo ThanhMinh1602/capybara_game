@@ -7,11 +7,14 @@ part 'app_state.dart'; // Khai báo phần của tệp chứa trạng thái
 part 'app_bloc.freezed.dart'; // Khai báo phần của tệp chứa mã được tạo bởi freezed
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc() : super(const AppState()) {
+  final AudioService audioService;
+  AppBloc({required this.audioService}) : super(const AppState()) {
     // Đăng ký các phương thức xử lý sự kiện
-    on<ChooseOptionSettingEvent>(onChooseOption);
-    on<StateMusicEvent>(onSetMusicState);
-    on<StateSoundEvent>(onSetSoundState);
+    on(onChooseOption);
+    on(onChangeMusicState);
+    on(onChangeSoundState);
+    on(onChangeBgmVolume);
+    on(onChangeEffectsVolume);
   }
 }
 
@@ -23,20 +26,35 @@ extension AppBlocExtension on AppBloc {
     emitter(state.copyWith(option: event.option));
   }
 
-  // Xử lý sự kiện thay đổi trạng thái âm nhạc
-  void onSetMusicState(StateMusicEvent event, Emitter<AppState> emitter) {
+  void onChangeMusicState(StateMusicEvent event, Emitter<AppState> emitter) {
     bool musicState = event.isPlayMusic;
-    if (musicState == true) {
-      AudioService().stopBgm(); // Dừng phát nhạc nền nếu đang phát
+    if (musicState) {
+      audioService.setBgmVolume(0);
     } else {
-      AudioService().playBgm(); // Phát nhạc nền nếu không phát
+      audioService.setBgmVolume(state.bgmVolume);
     }
-    emitter(state.copyWith(music: !musicState)); // Cập nhật trạng thái âm nhạc
+    emitter(state.copyWith(isPlayMusic: !musicState));
   }
 
-  // Xử lý sự kiện thay đổi trạng thái âm thanh
-  void onSetSoundState(StateSoundEvent event, Emitter<AppState> emitter) {
+  void onChangeSoundState(StateSoundEvent event, Emitter<AppState> emitter) {
     bool soundState = event.isPlaySound;
-    emitter(state.copyWith(sound: !soundState)); // Cập nhật trạng thái âm thanh
+    if (soundState) {
+      audioService.setEffectsVolume(0);
+    } else {
+      audioService.setEffectsVolume(state.effectsVolume);
+    }
+    emitter(state.copyWith(isPlaySound: !soundState));
+  }
+
+  void onChangeBgmVolume(
+      ChangeBgmVolumeEvent event, Emitter<AppState> emitter) {
+    audioService.setBgmVolume(event.volume);
+    emitter(state.copyWith(bgmVolume: event.volume));
+  }
+
+  void onChangeEffectsVolume(
+      ChangeEffectsVolumeEvent event, Emitter<AppState> emitter) {
+    audioService.setEffectsVolume(event.volume);
+    emitter(state.copyWith(effectsVolume: event.volume));
   }
 }

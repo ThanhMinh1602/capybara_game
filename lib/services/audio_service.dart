@@ -15,7 +15,7 @@ class AudioService {
   // Background sound
   void playBgm() {
     String path = "sounds/bgr_audio.mp3";
-    _grAudio.play(AssetSource(path), volume: 50);
+    _grAudio.play(AssetSource(path), volume: 0.5);
     _grAudio.setReleaseMode(ReleaseMode.loop);
   }
 
@@ -57,6 +57,18 @@ class AudioService {
     String path = "sounds/success_sound.mp3";
     await stopSound();
     await _levelSuccessSound.play(AssetSource(path));
+  }
+
+  void setBgmVolume(double volume) {
+    _grAudio.setVolume(volume);
+  }
+
+  // Set volume for sound effects
+  void setEffectsVolume(double volume) {
+    _tapGameSound.setVolume(volume);
+    _tapCardSound.setVolume(volume);
+    _tapCardSoundSuccess.setVolume(volume);
+    _levelSuccessSound.setVolume(volume);
   }
 
   // Dispose all audio players

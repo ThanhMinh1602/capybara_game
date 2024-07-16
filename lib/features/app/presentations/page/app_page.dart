@@ -25,6 +25,12 @@ class _AppState extends State<App> {
   }
 
   @override
+  void dispose() async {
+    await AudioService().dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: AppBinding.generateBloc,
