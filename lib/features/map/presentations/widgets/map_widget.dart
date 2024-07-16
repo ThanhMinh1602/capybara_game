@@ -9,8 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MapWidget extends StatelessWidget {
+class MapWidget extends StatefulWidget {
   const MapWidget({super.key});
+
+  @override
+  State<MapWidget> createState() => _MapWidgetState();
+}
+
+class _MapWidgetState extends State<MapWidget> {
+  @override
+  void initState() {
+    context.read<MapBloc>().add(const MapEvent.init());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +61,21 @@ class MapWidget extends StatelessWidget {
 
   Widget _buildLevelItem(BuildContext context, PlayerModel levelModel) {
     final position = levelItemPosition(levelModel.level);
-
     return BlocBuilder<MapBloc, MapState>(
       builder: (context, state) {
+        final bool isCompleted = levelModel.ratingStar != 0 ||
+            (state.dataLevelUnlock.length + 1 == levelModel.level);
         return Positioned(
           bottom: position['bottom'],
           left: position['left'],
           child: GestureDetector(
-            onTap: () {
-              context
-                  .read<MapBloc>()
-                  .add(MapEvent.chooseLevel(levelModel.level));
-            },
+            onTap: isCompleted
+                ? () {
+                    context
+                        .read<MapBloc>()
+                        .add(MapEvent.chooseLevel(levelModel.level));
+                  }
+                : null,
             child: Center(
               child: Column(
                 children: [
@@ -79,7 +93,7 @@ class MapWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       Image.asset(
-                        levelModel.ratingStar != 0
+                        isCompleted
                             ? Assets.icons.png.levelIcon.path
                             : Assets.icons.png.levelLock.path,
                         width: 140.w,

@@ -62,13 +62,14 @@ class AppNavigator {
   Future<T?> pushAndRemoveUntil<T extends Object?, TO extends Object?>({
     required ScreenType screen,
     NavigationType? type,
+    PageTransitionType? transitionType,
   }) async {
     return _getNavigator(type: type).pushAndRemoveUntil(
       PageTransition(
         settings: RouteSettings(
           name: screen.toString(),
         ),
-        type: PageTransitionType.rightToLeft,
+        type: transitionType ?? PageTransitionType.rightToLeft,
         child: ScreenTypeHelper.page(screen),
       ),
       (route) => false,

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/common/navigator/navigator.dart';
 import 'package:capybara_game/model/card_model.dart';
+import 'package:capybara_game/model/level_model.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/audio_service.dart';
 import 'package:capybara_game/services/level_service.dart';
@@ -28,6 +29,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     on(_onTapCard);
     on(onTapNextLevel);
     on(onTapRetryGame);
+    on(onTapMenu);
   }
 }
 
@@ -88,6 +90,21 @@ extension PlayerBlocExtension on PlayerBloc {
 
           // Phát âm thanh khi hoàn thành level
           audioService.levelSuccessSound();
+          final playerModel = PlayerModel(
+              level: event.level,
+              tries: state.tries,
+              ratingStar: state.ratingStar);
+          final levelData = await levelService.getDataLevelByLevel(event.level);
+          if (levelData == null) {
+            await levelService.addLevel(playerModel);
+          } else {
+            final oldStar = levelData.ratingStar;
+            final oldTries = levelData.tries;
+            if (oldStar < playerModel.ratingStar ||
+                oldTries > playerModel.tries) {
+              await levelService.updateLevel(playerModel);
+            }
+          }
         }
       } else {
         await Future.delayed(const Duration(
@@ -104,20 +121,7 @@ extension PlayerBlocExtension on PlayerBloc {
 
   Future<void> onTapNextLevel(
       PlayerOnTapNextEvent event, Emitter<PlayerState> emitter) async {
-    final levelData =
-        await levelService.getDataLevelByLevel(event.levelModel.level);
     audioService.tapCardSound();
-    if (levelData == null) {
-      await levelService.addLevel(event.levelModel);
-    } else {
-      final oldStar = levelData.ratingStar;
-      final oldTries = levelData.tries;
-      if (oldStar < event.levelModel.ratingStar ||
-          oldTries > event.levelModel.tries) {
-        await levelService.updateLevel(event.levelModel);
-      }
-    }
-
     appNavigator.push(
       screen: ScreenType.player(event.levelModel.level + 1),
       pageTransitionType: PageTransitionType.fade,
@@ -133,6 +137,12 @@ extension PlayerBlocExtension on PlayerBloc {
         ratingStar: 0));
     appNavigator.pop();
     add(PlayerEvent.init(event.levelModel.level));
+  }
+
+  void onTapMenu(PlayerOnTapMenuEvent event, Emitter<PlayerState> emitter) {
+    appNavigator.pushAndRemoveUntil(
+        screen: const ScreenType.map(),
+        transitionType: PageTransitionType.leftToRightWithFade);
   }
 
   bool _allCardsMatched() {

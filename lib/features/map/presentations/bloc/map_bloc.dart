@@ -15,7 +15,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       : super(const MapState()) {
     on(onInit);
     on(onChooseLevel);
-    add(const MapEvent.init());
   }
 }
 
