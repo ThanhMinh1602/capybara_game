@@ -1,6 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:capybara_game/model/player_model.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart'; 
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();

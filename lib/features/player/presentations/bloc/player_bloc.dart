@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/common/navigator/navigator.dart';
 import 'package:capybara_game/model/card_model.dart';
-import 'package:capybara_game/model/level_model.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/audio_service.dart';
 import 'package:capybara_game/services/level_service.dart';

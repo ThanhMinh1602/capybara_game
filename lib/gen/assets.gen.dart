@@ -58,6 +58,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/long_map.png
+  AssetGenImage get longMap =>
+      const AssetGenImage('assets/images/long_map.png');
+
   /// File path: assets/images/map.png
   AssetGenImage get map => const AssetGenImage('assets/images/map.png');
 
@@ -76,6 +80,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/map5.png
   AssetGenImage get map5 => const AssetGenImage('assets/images/map5.png');
 
+  /// File path: assets/images/map6.png
+  AssetGenImage get map6 => const AssetGenImage('assets/images/map6.png');
+
+  /// File path: assets/images/map7.png
+  AssetGenImage get map7 => const AssetGenImage('assets/images/map7.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         bgr1,
@@ -87,12 +97,15 @@ class $AssetsImagesGen {
         cloudSettingBottom,
         functionAccount,
         logo,
+        longMap,
         map,
         map1,
         map2,
         map3,
         map4,
-        map5
+        map5,
+        map6,
+        map7
       ];
 }
 
@@ -357,11 +370,71 @@ class $AssetsImagesCardsGen {
   /// File path: assets/images/cards/33.png
   AssetGenImage get a33 => const AssetGenImage('assets/images/cards/33.png');
 
+  /// File path: assets/images/cards/34.png
+  AssetGenImage get a34 => const AssetGenImage('assets/images/cards/34.png');
+
+  /// File path: assets/images/cards/35.png
+  AssetGenImage get a35 => const AssetGenImage('assets/images/cards/35.png');
+
+  /// File path: assets/images/cards/36.png
+  AssetGenImage get a36 => const AssetGenImage('assets/images/cards/36.png');
+
+  /// File path: assets/images/cards/37.png
+  AssetGenImage get a37 => const AssetGenImage('assets/images/cards/37.png');
+
+  /// File path: assets/images/cards/38.png
+  AssetGenImage get a38 => const AssetGenImage('assets/images/cards/38.png');
+
+  /// File path: assets/images/cards/39.png
+  AssetGenImage get a39 => const AssetGenImage('assets/images/cards/39.png');
+
   /// File path: assets/images/cards/4.png
   AssetGenImage get a4 => const AssetGenImage('assets/images/cards/4.png');
 
+  /// File path: assets/images/cards/40.png
+  AssetGenImage get a40 => const AssetGenImage('assets/images/cards/40.png');
+
+  /// File path: assets/images/cards/41.png
+  AssetGenImage get a41 => const AssetGenImage('assets/images/cards/41.png');
+
+  /// File path: assets/images/cards/42.png
+  AssetGenImage get a42 => const AssetGenImage('assets/images/cards/42.png');
+
+  /// File path: assets/images/cards/43.png
+  AssetGenImage get a43 => const AssetGenImage('assets/images/cards/43.png');
+
+  /// File path: assets/images/cards/44.png
+  AssetGenImage get a44 => const AssetGenImage('assets/images/cards/44.png');
+
+  /// File path: assets/images/cards/45.png
+  AssetGenImage get a45 => const AssetGenImage('assets/images/cards/45.png');
+
+  /// File path: assets/images/cards/46.png
+  AssetGenImage get a46 => const AssetGenImage('assets/images/cards/46.png');
+
+  /// File path: assets/images/cards/47.png
+  AssetGenImage get a47 => const AssetGenImage('assets/images/cards/47.png');
+
+  /// File path: assets/images/cards/48.png
+  AssetGenImage get a48 => const AssetGenImage('assets/images/cards/48.png');
+
+  /// File path: assets/images/cards/49.png
+  AssetGenImage get a49 => const AssetGenImage('assets/images/cards/49.png');
+
   /// File path: assets/images/cards/5.png
   AssetGenImage get a5 => const AssetGenImage('assets/images/cards/5.png');
+
+  /// File path: assets/images/cards/50.png
+  AssetGenImage get a50 => const AssetGenImage('assets/images/cards/50.png');
+
+  /// File path: assets/images/cards/51.png
+  AssetGenImage get a51 => const AssetGenImage('assets/images/cards/51.png');
+
+  /// File path: assets/images/cards/52.png
+  AssetGenImage get a52 => const AssetGenImage('assets/images/cards/52.png');
+
+  /// File path: assets/images/cards/53.png
+  AssetGenImage get a53 => const AssetGenImage('assets/images/cards/53.png');
 
   /// File path: assets/images/cards/6.png
   AssetGenImage get a6 => const AssetGenImage('assets/images/cards/6.png');
@@ -403,8 +476,28 @@ class $AssetsImagesCardsGen {
         a31,
         a32,
         a33,
+        a34,
+        a35,
+        a36,
+        a37,
+        a38,
+        a39,
         a4,
+        a40,
+        a41,
+        a42,
+        a43,
+        a44,
+        a45,
+        a46,
+        a47,
+        a48,
+        a49,
         a5,
+        a50,
+        a51,
+        a52,
+        a53,
         a6,
         a7,
         a8,
