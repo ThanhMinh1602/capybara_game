@@ -1,17 +1,15 @@
 class GridConfigModel {
   final int gridSize;
   final int numPairs;
+  final double maxScore;
+  final double tries;
   final int matchCount;
-  final int tries3Star;
-  final int tries2Star;
-  final int tries1Star;
 
   GridConfigModel({
+    required this.maxScore,
     required this.gridSize,
     required this.numPairs,
+    required this.tries,
     required this.matchCount,
-    required this.tries3Star,
-    required this.tries2Star,
-    required this.tries1Star,
   });
 }

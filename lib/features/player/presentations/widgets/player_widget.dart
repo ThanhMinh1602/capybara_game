@@ -4,11 +4,11 @@ import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/common/extensions/build_context_extension.dart';
 import 'package:capybara_game/features/player/presentations/bloc/player_bloc.dart';
+import 'package:capybara_game/features/player/presentations/widgets/grid_config.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/grid_config_model.dart';
 import 'package:capybara_game/model/player_model.dart';
-import 'package:capybara_game/services/player_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -92,7 +92,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     return BlocBuilder<PlayerBloc, PlayerState>(builder: (context, state) {
       final datas = state.dataCard;
       final level = widget.level;
-      final config = PlayerService().getGridConfigModel(level);
+      final config = GridConfig().getGridConfigModel(level);
       return Column(
         children: [
           Container(
@@ -178,15 +178,16 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           alignment: Alignment.center,
           child: LayoutBuilder(
             builder: (context, constraints) {
-              return card.isFlipped
-                  ? Image.asset(
-                      card.identifier,
-                    )
-                  : Image.asset(
-                      Assets.icons.png.questionMark.path,
-                      width: constraints.maxWidth * 0.3,
-                      fit: BoxFit.scaleDown,
-                    );
+              return
+                  // card.isFlipped ?
+                  Image.asset(
+                card.identifier,
+              );
+              // : Image.asset(
+              //     Assets.icons.png.questionMark.path,
+              //     width: constraints.maxWidth * 0.3,
+              //     fit: BoxFit.scaleDown,
+              //   );
             },
           ),
         ),

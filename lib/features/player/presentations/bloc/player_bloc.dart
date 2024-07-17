@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/common/navigator/navigator.dart';
+import 'package:capybara_game/features/player/presentations/widgets/grid_config.dart';
 import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/audio_service.dart';
 import 'package:capybara_game/services/level_service.dart';
-import 'package:capybara_game/services/player_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -15,7 +15,7 @@ part 'player_bloc.freezed.dart';
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   final AppNavigator appNavigator;
   final LevelService levelService;
-  final PlayerService playerService;
+  final GridConfig playerService;
   final AudioService audioService;
 
   PlayerBloc(
@@ -56,8 +56,8 @@ extension PlayerBlocExtension on PlayerBloc {
     audioService.tapCardSound();
     card.isFlipped = true; // Lật thẻ hiện tại
     int newTries = state.tries + 1; // Tăng tries lên 1
-    int stars = _calculateStars(newTries, event.level); // Tính số sao
-    emitter(state.copyWith(ratingStar: stars));
+    // int stars = _calculateStars(newTries, event.level); // Tính số sao
+    // emitter(state.copyWith(ratingStar: stars));
 
     if (state.firstSelectedCard == null) {
       emitter(state.copyWith(
@@ -151,20 +151,5 @@ extension PlayerBlocExtension on PlayerBloc {
       }
     }
     return true;
-  }
-
-  int _calculateStars(int tries, int levelData) {
-    final level = levelData;
-    final config = playerService.getGridConfigModel(level);
-
-    if (tries <= config.tries3Star) {
-      return 3;
-    } else if (tries <= config.tries2Star) {
-      return 2;
-    } else if (tries <= config.tries1Star) {
-      return 1;
-    } else {
-      return 0;
-    }
   }
 }

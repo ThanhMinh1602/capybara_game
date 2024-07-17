@@ -69,13 +69,18 @@ class _MapWidgetState extends State<MapWidget> {
           bottom: position['bottom'],
           left: position['left'],
           child: GestureDetector(
-            onTap: isCompleted
-                ? () {
-                    context
-                        .read<MapBloc>()
-                        .add(MapEvent.chooseLevel(levelModel.level));
-                  }
-                : null,
+            onTap: () {
+              context
+                  .read<MapBloc>()
+                  .add(MapEvent.chooseLevel(levelModel.level));
+            },
+            // isCompleted
+            //     ? () {
+            //         context
+            //             .read<MapBloc>()
+            //             .add(MapEvent.chooseLevel(levelModel.level));
+            //       }
+            //     : null,
             child: Center(
               child: Column(
                 children: [
