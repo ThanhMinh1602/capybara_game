@@ -2,7 +2,7 @@ import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/components/hearder/map_header.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/map/presentations/bloc/map_bloc.dart';
-import 'package:capybara_game/features/map/presentations/widgets/data_map.dart';
+import 'package:capybara_game/features/map/presentations/widgets/config_map.dart';
 import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class _MapWidgetState extends State<MapWidget> {
         children: [
           Image.asset(
             mapData.imagePath,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             width: double.infinity,
             height: double.infinity,
           ),
@@ -96,12 +96,12 @@ class _MapWidgetState extends State<MapWidget> {
                         isCompleted
                             ? Assets.icons.png.levelIcon.path
                             : Assets.icons.png.levelLock.path,
-                        width: 140.w,
-                        height: 140.h,
+                        width: 80.w,
+                        height: 80.h,
                       ),
                       Text(
                         '${levelModel.level}',
-                        style: AppStyle.kanit_bold_102,
+                        style: AppStyle.kanit_bold_70,
                       ),
                     ],
                   ),

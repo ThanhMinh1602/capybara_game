@@ -30,9 +30,9 @@ class AppStyle {
       fontWeight: FontWeight.bold,
       fontStyle: FontStyle.italic);
 
-  static TextStyle kanit_bold_102 = GoogleFonts.kanit(
+  static TextStyle kanit_bold_70 = GoogleFonts.kanit(
     color: AppColor.c_ffffff,
-    fontSize: 102.sp,
+    fontSize: 70.sp,
     fontWeight: FontWeight.w500,
   );
   static TextStyle kanit_bold_61 = GoogleFonts.kanit(
