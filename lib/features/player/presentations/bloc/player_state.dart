@@ -10,6 +10,7 @@ class PlayerState with _$PlayerState {
       @Default(0) int tries,
       @Default(0) int oldTries,
       @Default(3) int ratingStar,
+      @Default(0.0) double currentScore,
       @Default(false) bool isSuccess,
       @Default({}) Map<String, dynamic> config}) = _PlayerState;
 }

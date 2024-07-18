@@ -10,7 +10,7 @@ class PlayerBinding {
     return PlayerBloc(
       appNavigator: context.getNavigator(),
       levelService: LevelService(),
-      playerService: GridConfig(),
+      gridConfig: GridConfig(),
       audioService: AudioService(),
     );
   }

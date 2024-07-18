@@ -2,7 +2,7 @@ class GridConfigModel {
   final int gridSize;
   final int numPairs;
   final double maxScore;
-  final double tries;
+  final int tries;
   final int matchCount;
 
   GridConfigModel({

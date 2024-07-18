@@ -36,8 +36,8 @@ class GridConfig {
   }
 
   // Hàm tính số sao dựa trên điểm số (score) so với điểm số tối đa (maxScore)
-  int calculateStars(double score, double maxScore) {
-    double percent = score / maxScore;
+  int calculateStars(double currentScore, double maxScore) {
+    double percent = currentScore / maxScore;
 
     if (percent >= 1.0) {
       return 3; // 3 sao khi score đạt maxScore hoặc cao hơn

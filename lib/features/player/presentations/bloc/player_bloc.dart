@@ -15,13 +15,13 @@ part 'player_bloc.freezed.dart';
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   final AppNavigator appNavigator;
   final LevelService levelService;
-  final GridConfig playerService;
+  final GridConfig gridConfig;
   final AudioService audioService;
 
   PlayerBloc(
       {required this.levelService,
       required this.appNavigator,
-      required this.playerService,
+      required this.gridConfig,
       required this.audioService})
       : super((const PlayerState())) {
     on(_onInit);
@@ -35,13 +35,16 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
 extension PlayerBlocExtension on PlayerBloc {
   Future<void> _onInit(
       PlayerInitEvent event, Emitter<PlayerState> emitter) async {
-    final dataCard = playerService.generateCardList(event.level);
+    final dataGrid = gridConfig.getGridConfigModel(event.level);
+    final dataCard = gridConfig.generateCardList(event.level);
     final dataLevel = await levelService.getDataLevelByLevel(event.level);
+    int tries = dataGrid.tries;
     if (dataLevel == null) {
-      emitter(state.copyWith(dataCard: dataCard));
+      emitter(state.copyWith(dataCard: dataCard, tries: tries));
     } else {
       final oldTries = dataLevel.tries;
-      emitter(state.copyWith(dataCard: dataCard, oldTries: oldTries));
+      emitter(
+          state.copyWith(dataCard: dataCard, oldTries: oldTries, tries: tries));
     }
   }
 
@@ -55,9 +58,10 @@ extension PlayerBlocExtension on PlayerBloc {
     // Phát âm thanh khi người chơi chạm vào thẻ
     audioService.tapCardSound();
     card.isFlipped = true; // Lật thẻ hiện tại
-    int newTries = state.tries + 1; // Tăng tries lên 1
-    // int stars = _calculateStars(newTries, event.level); // Tính số sao
-    // emitter(state.copyWith(ratingStar: stars));
+    int newTries = state.tries - 1; // Tăng tries trừ đi 1
+    int stars = gridConfig.calculateStars(
+        state.currentScore, event.maxScore); // Tính số sao
+    emitter(state.copyWith(ratingStar: stars));
 
     if (state.firstSelectedCard == null) {
       emitter(state.copyWith(
@@ -77,7 +81,9 @@ extension PlayerBlocExtension on PlayerBloc {
         emitter(state.copyWith(
             firstSelectedCard: null,
             secondSelectedCard: null,
-            isProcessing: false));
+            isProcessing: false,
+            currentScore: state.currentScore + 20));
+        print('Current Score: ${state.currentScore}');
 
         // Phát âm thanh khi ghép thành công
         audioService.tapCardSoundSuccess();

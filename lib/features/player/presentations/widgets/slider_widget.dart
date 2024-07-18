@@ -1,62 +1,66 @@
-// ignore_for_file: library_private_types_in_public_api
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:capybara_game/common/constants/app_color.dart';
+import 'package:capybara_game/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SlideTransitionExample extends StatefulWidget {
-  const SlideTransitionExample({super.key});
-
-  @override
-  _SlideTransitionExampleState createState() => _SlideTransitionExampleState();
-}
-
-class _SlideTransitionExampleState extends State<SlideTransitionExample>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Offset> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1),
-    );
-    _animation = Tween<Offset>(
-      begin: const Offset(1, 0), // Slide từ phải qua trái
-      end: Offset.zero,
-    ).animate(_controller);
-
-    // Khởi động animation
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class StarSlider extends StatelessWidget {
+  final double maxScore;
+  final double currentScore;
+  const StarSlider({
+    super.key,
+    required this.maxScore,
+    required this.currentScore,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Slide Transition Example'),
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        disabledActiveTrackColor: AppColor.c_C3E558,
+        trackHeight: 7.0,
+        thumbShape: SliderComponentShape.noThumb,
       ),
-      body: Center(
-        child: SlideTransition(
-          position: _animation,
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.blue,
-            child: const Center(
-              child: Text(
-                'Slide me!',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
+      child: Stack(
+        children: [
+          Slider(
+            value: currentScore,
+            min: 0,
+            max: maxScore,
+            onChanged: null,
+          ),
+          Positioned(
+            left: 10,
+            top: 10,
+            bottom: 10,
+            child: Image.asset(
+              Assets.icons.png.playerStar.path,
+              width: 64.w,
+              height: 64.h,
             ),
           ),
-        ),
+          Positioned(
+            left: 100,
+            top: 10,
+            bottom: 10,
+            child: Image.asset(
+              Assets.icons.png.playerStar.path,
+              width: 64.w,
+              height: 64.h,
+            ),
+          ),
+          Positioned(
+            right: 10,
+            top: 10,
+            bottom: 10,
+            child: Image.asset(
+              Assets.icons.png.playerStar.path,
+              width: 64.w,
+              height: 64.h,
+            ),
+          ),
+        ],
       ),
     );
   }
