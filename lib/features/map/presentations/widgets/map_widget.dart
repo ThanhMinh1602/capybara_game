@@ -1,5 +1,6 @@
 import 'package:capybara_game/common/components/button/setting_button.dart';
 import 'package:capybara_game/common/components/hearder/map_header.dart';
+import 'package:capybara_game/common/constants/app_color.dart';
 import 'package:capybara_game/common/constants/app_style.dart';
 import 'package:capybara_game/features/map/presentations/bloc/map_bloc.dart';
 import 'package:capybara_game/features/map/presentations/widgets/config_map.dart';
@@ -83,21 +84,50 @@ class _MapWidgetState extends State<MapWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       for (int i = 1; i <= levelModel.ratingStar; i++)
-                        Image.asset(
-                          Assets.icons.png.star.path,
-                          width: 50.w,
+                        Container(
+                          width: 40.w,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: levelModel.ratingStar != 0
+                                    ? AppColor.c_04AFD6.withOpacity(0.7)
+                                    : AppColor.c_000000.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 10,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Image.asset(
+                            Assets.icons.png.star.path,
+                          ),
                         ),
                     ],
                   ),
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      Image.asset(
-                        isCompleted
-                            ? Assets.icons.png.levelIcon.path
-                            : Assets.icons.png.levelLock.path,
+                      Container(
                         width: 80.w,
                         height: 80.h,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: levelModel.ratingStar != 0
+                                  ? AppColor.c_04AFD6.withOpacity(0.7)
+                                  : AppColor.c_000000.withOpacity(0.7),
+                              spreadRadius: 1,
+                              blurRadius: 16.0,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          isCompleted
+                              ? Assets.icons.png.levelIcon.path
+                              : Assets.icons.png.levelLock.path,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Text(
                         '${levelModel.level}',

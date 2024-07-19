@@ -1,7 +1,7 @@
 import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/grid_config_model.dart';
 
-class PlayerService {
+class GridConfig {
   List<String> generateCardPaths() {
     List<String> cardPaths = [];
     for (int i = 1; i <= 32; i++) {

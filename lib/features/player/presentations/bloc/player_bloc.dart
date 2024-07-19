@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/common/navigator/navigator.dart';
+import 'package:capybara_game/features/player/presentations/widgets/grid_config.dart';
 import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/audio_service.dart';
 import 'package:capybara_game/services/level_service.dart';
-import 'package:capybara_game/services/player_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -15,7 +15,7 @@ part 'player_bloc.freezed.dart';
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   final AppNavigator appNavigator;
   final LevelService levelService;
-  final PlayerService playerService;
+  final GridConfig playerService;
   final AudioService audioService;
 
   PlayerBloc(
