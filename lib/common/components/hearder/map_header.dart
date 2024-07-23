@@ -1,12 +1,30 @@
 import 'package:capybara_game/common/components/hearder/header_item.dart';
 import 'package:capybara_game/common/constants/app_color.dart';
+import 'package:capybara_game/services/shared_pref_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MapHeader extends StatelessWidget {
+class MapHeader extends StatefulWidget {
   const MapHeader({
     super.key,
   });
+
+  @override
+  State<MapHeader> createState() => _MapHeaderState();
+}
+
+class _MapHeaderState extends State<MapHeader> {
+  int totalPoint = 0;
+  @override
+  void initState() async {
+    totalPoint = await getTotalPoint();
+    super.initState();
+  }
+
+  Future<int> getTotalPoint() async {
+    int point = SharedPrefService().getPoint() ?? 0;
+    return point;
+  }
 
   @override
   Widget build(BuildContext context) {
