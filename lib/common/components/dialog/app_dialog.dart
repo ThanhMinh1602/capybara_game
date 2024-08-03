@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppDialog {
   static Future<void> settingDialog(BuildContext context) {
     return showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return BlocBuilder<AppBloc, AppState>(
@@ -148,6 +149,7 @@ class AppDialog {
     void Function()? onTapContinute,
   }) {
     return showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return BlocBuilder<AppBloc, AppState>(
