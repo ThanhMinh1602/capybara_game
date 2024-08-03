@@ -31,8 +31,8 @@ class CustomDialog extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                  top: 75.h,
-                  bottom: 50.h,
+                  top: 100.h,
+                  bottom: 20.h,
                   left: 14.w,
                   right: 25.w,
                   child: Container(

@@ -5,6 +5,7 @@ import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/player_model.dart';
 import 'package:capybara_game/services/audio_service.dart';
 import 'package:capybara_game/services/level_service.dart';
+import 'package:capybara_game/services/shared_pref_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -89,6 +90,19 @@ extension PlayerBlocExtension on PlayerBloc {
 
           // Phát âm thanh khi hoàn thành level
           audioService.levelSuccessSound();
+
+          int totalPoint = SharedPrefService().getPoint() ?? 0;
+
+          if (state.ratingStar == 3) {
+            totalPoint += 300;
+          } else if (state.ratingStar == 2) {
+            totalPoint += 200;
+          } else if (state.ratingStar == 1) {
+            totalPoint += 100;
+          }
+
+          await SharedPrefService().savePoint(totalPoint);
+
           final playerModel = PlayerModel(
               level: event.level,
               tries: state.tries,

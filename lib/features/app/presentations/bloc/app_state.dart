@@ -8,5 +8,6 @@ class AppState with _$AppState {
     @Default(true) bool isPlaySound,
     @Default(0.5) double bgmVolume,
     @Default(0.5) double effectsVolume,
+    @Default(0) int totalPoint,
   }) = _AppState;
 }

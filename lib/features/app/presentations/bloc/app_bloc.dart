@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:capybara_game/services/audio_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,6 +22,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
 // Mở rộng thêm các phương thức xử lý sự kiện cho AppBloc
 extension AppBlocExtension on AppBloc {
+
   // Xử lý sự kiện thay đổi tùy chọn
   void onChooseOption(
       ChooseOptionSettingEvent event, Emitter<AppState> emitter) {

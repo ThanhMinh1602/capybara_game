@@ -1,5 +1,6 @@
 import 'package:capybara_game/model/card_model.dart';
 import 'package:capybara_game/model/grid_config_model.dart';
+import 'dart:math';
 
 class GridConfig {
   List<String> generateCardPaths() {
@@ -12,6 +13,8 @@ class GridConfig {
 
   List<CardModel> generateCardList(int level) {
     List<String> identifiers = generateCardPaths();
+    identifiers.shuffle(Random());
+
     List<CardModel> cards = [];
     final config = getGridConfigModel(level);
 
@@ -21,12 +24,7 @@ class GridConfig {
       }
     }
 
-    while (cards.length < config.gridSize * config.gridSize) {
-      cards.add(CardModel(
-          identifier: identifiers[cards.length % identifiers.length]));
-    }
-
-    cards.shuffle();
+    cards.shuffle(Random());
     return cards;
   }
 
